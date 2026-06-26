@@ -1,31 +1,38 @@
 <!doctype html>
-
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#070506">
-  <meta name="robots" content="noindex,follow">  <title>Arnaud & Angélique — Notre histoire | MakeYourStory.fr</title>
-  <meta name="description" content="Démo immersive d’une histoire personnalisée créée avec MakeYourStory.">
-  <link rel="canonical" href="https://makeyourstory.fr/stories/demo/index.html">  <meta property="og:type" content="website">
+  <meta name="robots" content="noindex,follow">
+  <title>Arnaud & Angélique — Notre histoire | MakeYourStory.fr</title>
+  <meta name="description" content="Démo immersive MakeYourStory — une histoire en images, en musique et en émotions.">
+  <link rel="canonical" href="https://makeyourstory.fr/stories/demo/index.html">
+
+  <meta property="og:type" content="website">
   <meta property="og:site_name" content="MakeYourStory">
   <meta property="og:title" content="Arnaud & Angélique — Notre histoire">
-  <meta property="og:description" content="Un exemple immersif de site souvenir personnalisé.">
+  <meta property="og:description" content="Une histoire à découvrir sans se presser.">
   <meta property="og:url" content="https://makeyourstory.fr/stories/demo/index.html">
-  <meta property="og:image" content="https://makeyourstory.fr/images/og-makeyourstory.webp">  <link rel="icon" href="../../images/favicon.webp" type="image/webp">
-  <link rel="apple-touch-icon" href="../../images/apple-touch-icon.webp">  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <meta property="og:image" content="https://makeyourstory.fr/images/demo-hero.webp">
+
+  <link rel="icon" href="../../images/favicon.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="../../images/apple-touch-icon.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">  <style>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
     :root{
-      --black:#070506;
-      --black-soft:#12090d;
+      --ink:#070506;
+      --ink-soft:#130a0e;
+      --wine:#481224;
       --rose:#ef7f9d;
       --rose-soft:#ffcbd5;
-      --wine:#4a1325;
-      --paper:#fff8f5;
-      --paper-ink:#351720;
-      --muted:#cbb8bd;
-      --line:rgba(255,205,216,.16);
+      --cream:#fff8f5;
+      --muted:#d1bdc3;
+      --line:rgba(255,210,220,.16);
       --max:1240px;
     }
 
@@ -36,1584 +43,384 @@
       min-width:320px;
       overflow-x:hidden;
       background:
-        radial-gradient(1000px 700px at 100% 0%,rgba(170,39,75,.18),transparent 65%),
-        radial-gradient(900px 800px at 0% 44%,rgba(81,13,34,.17),transparent 65%),
-        var(--black);
-      color:var(--paper);
+        radial-gradient(1000px 700px at 100% 0%,rgba(171,40,75,.19),transparent 63%),
+        radial-gradient(900px 760px at 0% 40%,rgba(80,13,34,.17),transparent 68%),
+        var(--ink);
+      color:var(--cream);
       font-family:"DM Sans",Arial,sans-serif;
-      line-height:1.45;
+      line-height:1.5;
     }
 
     a{color:inherit;text-decoration:none}
     button{font:inherit}
-    ::selection{background:rgba(239,127,157,.48);color:#fff}
+    ::selection{background:rgba(239,127,157,.52);color:#fff}
 
-    .scroll-progress{
-      position:fixed;
-      top:0;
-      left:0;
-      z-index:999;
-      width:100%;
-      height:2px;
-      background:rgba(255,255,255,.07);
-      pointer-events:none;
-    }
+    .progress{position:fixed;inset:0 auto auto 0;z-index:999;width:100%;height:2px;background:rgba(255,255,255,.08);pointer-events:none}
+    .progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--rose),var(--rose-soft));box-shadow:0 0 15px rgba(255,130,163,.95)}
 
-    .scroll-progress span{
-      display:block;
-      width:0;
-      height:100%;
-      background:linear-gradient(90deg,var(--rose),var(--rose-soft));
-      box-shadow:0 0 16px rgba(255,133,165,.92);
-    }
-
-    /* ÉCRAN D’ENTRÉE */
-
+    /* Entrée */
     .entry{
-      position:fixed;
-      inset:0;
-      z-index:900;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      background:var(--black);
+      position:fixed;inset:0;z-index:900;display:grid;place-items:center;overflow:hidden;background:var(--ink);
       transition:opacity .9s ease,visibility .9s ease;
     }
-
-    .entry.is-open{
-      opacity:0;
-      visibility:hidden;
-      pointer-events:none;
-    }
-
+    .entry.is-open{opacity:0;visibility:hidden;pointer-events:none}
     .entry::before{
-      content:"";
-      position:absolute;
-      inset:0;
+      content:"";position:absolute;inset:0;
       background:
-        linear-gradient(180deg,rgba(7,4,5,.25),rgba(7,4,5,.82)),
-        url("../../images/demo-gate.webp") center/cover;
-      transform:scale(1.06);
-      animation:slowZoom 16s ease-in-out infinite alternate;
+        linear-gradient(180deg,rgba(7,4,5,.22),rgba(7,4,5,.84)),
+        linear-gradient(90deg,rgba(7,4,5,.56),transparent 50%,rgba(7,4,5,.38)),
+        url("../../images/demo-intro.webp") center/cover;
+      transform:scale(1.07);animation:entryZoom 16s ease-in-out infinite alternate;
     }
-
     .entry::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at 50% 41%,transparent 0 14%,rgba(7,4,5,.14) 45%,rgba(7,4,5,.84) 100%),
-        linear-gradient(90deg,rgba(7,4,5,.52),transparent 44%,rgba(7,4,5,.42));
+      content:"";position:absolute;inset:0;
+      background:radial-gradient(circle at 50% 41%,transparent 0 15%,rgba(7,4,5,.12) 46%,rgba(7,4,5,.75) 100%);
     }
-
-    @keyframes slowZoom{
-      from{transform:scale(1.06)}
-      to{transform:scale(1.16)}
+    @keyframes entryZoom{from{transform:scale(1.07)}to{transform:scale(1.17)}}
+    .entry-inner{position:relative;z-index:1;width:min(650px,calc(100% - 36px));text-align:center}
+    .eyebrow{margin:0;color:var(--rose-soft);font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase}
+    .entry h1{
+      margin:18px 0 0;font:500 clamp(70px,12vw,142px)/.72 "Cormorant Garamond",Georgia,serif;letter-spacing:-.055em;
     }
-
-    .entry-inner{
-      position:relative;
-      z-index:1;
-      width:min(640px,calc(100% - 36px));
-      text-align:center;
+    .entry h1 span,.script{display:block;color:var(--rose-soft);font:400 .69em/.72 "Allura","Brush Script MT",cursive;letter-spacing:0}
+    .entry-copy{max-width:450px;margin:25px auto 29px;color:#f5e8eb;font-size:14px;line-height:1.72}
+    .cta{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 30px;border:1px solid transparent;border-radius:999px;
+      color:#fff;background:linear-gradient(135deg,#f28da5,#b93b5b);box-shadow:0 20px 42px rgba(223,88,123,.37);
+      font-size:12px;font-weight:700;cursor:pointer;transition:.2s ease;
     }
+    .cta:hover{transform:translateY(-2px);box-shadow:0 25px 48px rgba(238,105,141,.52)}
+    .entry-note{margin:20px 0 0;color:rgba(255,235,240,.66);font-size:9px;letter-spacing:.13em;text-transform:uppercase}
 
-    .entry-kicker,
-    .hero-kicker,
-    .final-kicker{
-      margin:0;
-      color:var(--rose-soft);
-      font-size:10px;
-      font-weight:700;
-      letter-spacing:.25em;
-      text-transform:uppercase;
+    /* Header */
+    .topbar{position:fixed;inset:0 0 auto 0;z-index:100;transition:.3s ease}
+    .topbar.solid{background:rgba(7,5,6,.9);border-bottom:1px solid rgba(255,255,255,.07);backdrop-filter:blur(15px)}
+    .nav{width:min(var(--max),calc(100% - 42px));min-height:76px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px}
+    .brand{display:flex;align-items:center;gap:10px;min-width:0}
+    .brand-mark{width:39px;height:39px;display:grid;place-items:center;position:relative;font:600 32px/1 "Cormorant Garamond",Georgia,serif}
+    .brand-mark:after{content:"♡";position:absolute;right:-5px;bottom:-6px;color:var(--rose);font:400 18px/1 Arial,sans-serif}
+    .brand-title{display:block;font:500 16px/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.23em}
+    .brand-sub{display:block;margin-top:4px;color:var(--rose-soft);font-size:7px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+    .nav-actions{display:flex;align-items:center;gap:10px}
+    .names{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#f5dfe4}
+    .sound{
+      width:39px;height:39px;display:grid;place-items:center;border:1px solid rgba(255,188,205,.45);border-radius:50%;background:rgba(7,4,5,.22);color:var(--rose-soft);cursor:pointer;transition:.2s ease;
     }
+    .sound.on,.sound:hover{background:linear-gradient(135deg,#ef849f,#b83b5b);color:#fff;box-shadow:0 0 22px rgba(244,120,154,.38)}
+    .back{border:1px solid rgba(255,205,216,.43);border-radius:999px;padding:9px 14px;color:#fff;font-size:10px;transition:.2s ease}
+    .back:hover{background:rgba(239,127,157,.14)}
 
-    .entry-title{
-      margin:19px 0 0;
-      font:500 clamp(67px,12vw,140px)/.73 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:-.05em;
-    }
-
-    .entry-title span,
-    .hero-title span,
-    .chapter-title span,
-    .letter-title span,
-    .film-title span,
-    .final-title span{
-      display:block;
-      color:var(--rose-soft);
-      font:400 .68em/.72 "Allura","Brush Script MT",cursive;
-      letter-spacing:0;
-    }
-
-    .entry-copy{
-      max-width:425px;
-      margin:26px auto 28px;
-      color:#f4e8eb;
-      font-size:14px;
-      line-height:1.68;
-    }
-
-    .button-main{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      min-height:53px;
-      padding:0 30px;
-      border:1px solid transparent;
-      border-radius:999px;
-      background:linear-gradient(135deg,#f28da5,#b93b5b);
-      color:#fff;
-      box-shadow:0 20px 42px rgba(221,87,121,.37);
-      font-size:12px;
-      font-weight:700;
-      cursor:pointer;
-      transition:.2s ease;
-    }
-
-    .button-main:hover{
-      transform:translateY(-2px);
-      box-shadow:0 25px 48px rgba(238,105,141,.52);
-    }
-
-    .entry-note{
-      margin:21px 0 0;
-      color:rgba(255,235,240,.64);
-      font-size:9px;
-      letter-spacing:.13em;
-      text-transform:uppercase;
-    }
-
-    /* HEADER */
-
-    .story-header{
-      position:fixed;
-      top:0;
-      left:0;
-      z-index:100;
-      width:100%;
-      transition:.3s ease;
-    }
-
-    .story-header.is-solid{
-      border-bottom:1px solid rgba(255,255,255,.07);
-      background:rgba(7,5,6,.89);
-      backdrop-filter:blur(15px);
-    }
-
-    .story-nav{
-      width:min(var(--max),calc(100% - 42px));
-      min-height:76px;
-      margin:auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width:0;
-    }
-
-    .brand-mark{
-      width:39px;
-      height:39px;
-      position:relative;
-      display:grid;
-      place-items:center;
-      font:600 32px/1 "Cormorant Garamond",Georgia,serif;
-    }
-
-    .brand-mark::after{
-      content:"♡";
-      position:absolute;
-      right:-5px;
-      bottom:-6px;
-      color:var(--rose);
-      font:400 18px/1 Arial,sans-serif;
-    }
-
-    .brand-name{
-      display:block;
-      font:500 16px/1 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:.23em;
-    }
-
-    .brand-sub{
-      display:block;
-      margin-top:4px;
-      color:var(--rose-soft);
-      font-size:7px;
-      font-weight:700;
-      letter-spacing:.23em;
-      text-transform:uppercase;
-    }
-
-    .header-actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-
-    .header-label{
-      color:rgba(255,234,239,.90);
-      font-size:10px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-    }
-
-    .sound-button{
-      width:39px;
-      height:39px;
-      display:grid;
-      place-items:center;
-      border:1px solid rgba(252,174,194,.42);
-      border-radius:50%;
-      background:rgba(7,4,5,.2);
-      color:var(--rose-soft);
-      cursor:pointer;
-      transition:.2s ease;
-    }
-
-    .sound-button:hover,
-    .sound-button.is-on{
-      background:linear-gradient(135deg,#ef849f,#b83b5b);
-      color:#fff;
-      box-shadow:0 0 22px rgba(244,120,154,.38);
-    }
-
-    .back-link{
-      border:1px solid rgba(252,174,194,.40);
-      border-radius:999px;
-      padding:9px 14px;
-      color:#fff;
-      font-size:10px;
-      transition:.2s ease;
-    }
-
-    .back-link:hover{background:rgba(239,127,157,.14)}
-
-    /* HERO */
-
+    /* Hero */
     .hero{
-      min-height:100svh;
-      position:relative;
-      display:grid;
-      align-items:end;
-      isolation:isolate;
-      overflow:hidden;
-      padding:120px 0 58px;
+      min-height:100svh;position:relative;display:grid;align-items:end;isolation:isolate;overflow:hidden;padding:120px 0 58px;
     }
-
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      z-index:-2;
+    .hero:before{
+      content:"";position:absolute;inset:0;z-index:-2;
       background:
-        linear-gradient(180deg,rgba(7,4,5,.09) 0%,rgba(7,4,5,.16) 35%,rgba(7,4,5,.92) 100%),
-        linear-gradient(90deg,rgba(7,4,5,.66),transparent 53%,rgba(7,4,5,.24)),
+        linear-gradient(180deg,rgba(7,4,5,.08),rgba(7,4,5,.16) 38%,rgba(7,4,5,.93) 100%),
+        linear-gradient(90deg,rgba(7,4,5,.66),transparent 53%,rgba(7,4,5,.23)),
         url("../../images/demo-hero.webp") center/cover;
-      transform:scale(1.04);
-      animation:heroMove 23s ease-in-out infinite alternate;
-    }
-
-    @keyframes heroMove{
-      from{transform:scale(1.04) translate3d(0,0,0)}
-      to{transform:scale(1.13) translate3d(-1.2%,1%,0)}
-    }
-
-    .hero::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      z-index:-1;
-      background:
-        radial-gradient(ellipse at 58% 7%,rgba(255,145,175,.16),transparent 45%),
-        radial-gradient(circle at 80% 33%,rgba(245,120,153,.18),transparent 19%);
-      mix-blend-mode:screen;
-    }
-
-    .hero-heart{
-      position:absolute;
-      right:6%;
-      top:16%;
-      width:min(39vw,540px);
-      aspect-ratio:1.06;
-      filter:drop-shadow(0 0 17px rgba(245,110,146,.5));
-      opacity:.73;
-      pointer-events:none;
-    }
-
-    .hero-heart::before,
-    .hero-heart::after{
-      content:"";
-      position:absolute;
-      top:18%;
-      width:49%;
-      height:70%;
-      border:4px solid rgba(255,144,172,.86);
-      border-bottom:0;
-      border-radius:50% 50% 0 0;
-    }
-
-    .hero-heart::before{
-      left:10%;
-      transform:rotate(-43deg);
-      transform-origin:100% 100%;
-    }
-
-    .hero-heart::after{
-      right:10%;
-      transform:rotate(43deg);
-      transform-origin:0 100%;
-    }
-
-    .hero-content,
-    .shell{
-      width:min(var(--max),calc(100% - 44px));
-      margin:auto;
-    }
-
-    .hero-title{
-      margin:13px 0 0;
-      max-width:790px;
-      font:500 clamp(79px,11.6vw,157px)/.69 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:-.058em;
-    }
-
-    .hero-title span{margin-top:15px}
-
-    .hero-copy{
-      max-width:390px;
-      margin:30px 0 0;
-      color:#f3e5e8;
-      font-size:14px;
-      line-height:1.66;
-    }
-
-    .hero-meta{
-      display:flex;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:17px;
-      margin-top:29px;
-      color:#f3dce2;
-      font-size:10px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-    }
-
-    .hero-meta span{
-      display:inline-flex;
-      align-items:center;
-      gap:9px;
-    }
-
-    .hero-meta span::before{
-      content:"";
-      width:24px;
-      height:1px;
-      background:var(--rose);
-    }
-
-    /* SECTIONS */
-
-    .story-section{padding:120px 0}
-
-    .chapter-index{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      color:var(--rose-soft);
-      font-size:10px;
-      font-weight:700;
-      letter-spacing:.20em;
-      text-transform:uppercase;
-    }
-
-    .chapter-index::before{
-      content:attr(data-number);
-      width:43px;
-      height:43px;
-      display:grid;
-      place-items:center;
-      border:1px solid rgba(246,141,165,.60);
-      border-radius:50%;
-      font:500 19px/1 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:0;
-    }
-
-    .chapter-title{
-      margin:21px 0 0;
-      font:500 clamp(47px,6vw,79px)/.90 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:-.044em;
-    }
-
-    .chapter-title span{margin-top:7px}
-
-    .chapter-copy{
-      max-width:485px;
-      margin:22px 0 0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.76;
-    }
-
-    .date-line{
-      display:inline-flex;
-      align-items:center;
-      gap:11px;
-      margin-top:26px;
-      color:#fff0f3;
-      font-size:10px;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-    }
-
-    .date-line::before{
-      content:"";
-      width:43px;
-      height:1px;
-      background:var(--rose);
-    }
-
-    /* CHAPITRE 1 */
-
-    .first-chapter{
-      display:grid;
-      grid-template-columns:.85fr 1.15fr;
-      gap:clamp(28px,6vw,90px);
-      align-items:center;
-    }
-
-    .first-photo{
-      min-height:610px;
-      position:relative;
-      overflow:hidden;
-      background:
-        linear-gradient(180deg,rgba(7,3,4,.02),rgba(7,3,4,.59)),
-        url("../../images/demo-first.webp") center/cover;
-      box-shadow:0 30px 80px rgba(0,0,0,.34);
-    }
-
-    .first-photo::before{
-      content:"";
-      position:absolute;
-      left:-34px;
-      bottom:-34px;
-      width:54%;
-      aspect-ratio:1;
-      border:1px solid rgba(247,145,169,.51);
-      border-radius:50%;
-    }
-
-    .photo-note{
-      position:absolute;
-      right:26px;
-      bottom:23px;
-      max-width:260px;
-      color:#fff;
-      font:400 39px/1 "Allura","Brush Script MT",cursive;
-      text-align:right;
-      text-shadow:0 5px 22px rgba(0,0,0,.42);
-    }
-
-    /* TIMELINE */
-
-    .timeline-section{
-      position:relative;
-      overflow:hidden;
-      padding:125px 0;
-      background:
-        linear-gradient(180deg,rgba(52,15,29,.84),rgba(9,5,7,.93)),
-        url("../../images/demo-timeline-bg.webp") center/cover;
-      background-blend-mode:overlay;
-    }
-
-    .timeline-section::before{
-      content:"";
-      position:absolute;
-      left:50%;
-      top:0;
-      bottom:0;
-      width:1px;
-      background:linear-gradient(transparent,rgba(255,179,196,.36),transparent);
-    }
-
-    .timeline-head{
-      position:relative;
-      text-align:center;
-    }
-
-    .timeline-head .chapter-index{justify-content:center}
-    .timeline-head .chapter-title{
-      max-width:780px;
-      margin-left:auto;
-      margin-right:auto;
-    }
-
-    .timeline-head .chapter-copy{
-      margin-left:auto;
-      margin-right:auto;
-    }
-
-    .timeline{
-      position:relative;
-      max-width:970px;
-      margin:65px auto 0;
-      display:grid;
-      gap:46px;
-    }
-
-    .timeline-item{
-      display:grid;
-      grid-template-columns:1fr 74px 1fr;
-      gap:23px;
-      align-items:center;
-    }
-
-    .timeline-item:nth-child(even) .timeline-copy{
-      grid-column:3;
-      text-align:left;
-    }
-
-    .timeline-item:nth-child(even) .timeline-photo{
-      grid-column:1;
-      grid-row:1;
-    }
-
-    .timeline-marker{
-      grid-column:2;
-      grid-row:1;
-      width:58px;
-      height:58px;
-      margin:auto;
-      display:grid;
-      place-items:center;
-      border:1px solid rgba(255,180,197,.66);
-      border-radius:50%;
-      background:rgba(22,8,13,.70);
-      color:var(--rose-soft);
-      font:500 18px/1 "Cormorant Garamond",Georgia,serif;
-      position:relative;
-      z-index:1;
-    }
-
-    .timeline-photo{
-      min-height:210px;
-      background:
-        linear-gradient(180deg,rgba(7,3,4,.03),rgba(7,3,4,.35)),
-        var(--photo) center/cover;
-      box-shadow:0 18px 45px rgba(0,0,0,.28);
-    }
-
-    .timeline-copy h3{
-      margin:0;
-      font:500 33px/1 "Cormorant Garamond",Georgia,serif;
-    }
-
-    .timeline-copy p{
-      margin:9px 0 0;
-      color:#ead7dc;
-      font-size:12px;
-      line-height:1.68;
-    }
-
-    .timeline-copy small{
-      display:block;
-      margin-top:10px;
-      color:var(--rose-soft);
-      font-size:10px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-    }
-
-    /* CITATION */
-
-    .quote-section{
-      position:relative;
-      overflow:hidden;
-      padding:145px 0;
-      text-align:center;
-      background:
-        radial-gradient(circle at 50% 44%,rgba(190,43,80,.25),transparent 42%),
-        linear-gradient(180deg,rgba(49,14,26,.90),rgba(8,5,7,.96));
-      border-top:1px solid rgba(255,199,211,.09);
-      border-bottom:1px solid rgba(255,199,211,.09);
-    }
-
-    .quote-section::before,
-    .quote-section::after{
-      content:"♡";
-      position:absolute;
-      color:rgba(248,129,159,.14);
-      font:400 clamp(200px,26vw,380px)/1 "Cormorant Garamond",Georgia,serif;
-      pointer-events:none;
-    }
-
-    .quote-section::before{top:8%;left:-6%}
-    .quote-section::after{
-      right:-7%;
-      bottom:-4%;
-      transform:rotate(18deg);
-    }
-
-    .quote{
-      position:relative;
-      z-index:1;
-      width:min(900px,calc(100% - 44px));
-      margin:auto;
-      font:500 clamp(40px,6.5vw,84px)/.97 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:-.04em;
-    }
-
-    .quote span{
-      display:block;
-      margin-top:23px;
-      color:var(--rose-soft);
-      font:400 clamp(52px,6vw,82px)/.70 "Allura","Brush Script MT",cursive;
-    }
-
-    /* GALERIE */
-
-    .gallery-intro{
-      display:grid;
-      grid-template-columns:.8fr 1.2fr;
-      gap:clamp(28px,6vw,80px);
-      align-items:end;
-      margin-bottom:40px;
-    }
-
-    .gallery-intro .chapter-copy{margin-bottom:4px}
-
-    .gallery{
-      display:grid;
-      grid-template-columns:1.12fr .88fr .88fr;
-      grid-auto-rows:235px;
-      gap:14px;
-    }
-
-    .gallery-item{
-      position:relative;
-      overflow:hidden;
-      border:0;
-      padding:0;
-      background:var(--image) center/cover;
-      cursor:pointer;
-      isolation:isolate;
-      transition:transform .25s ease;
-    }
-
-    .gallery-item::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      z-index:1;
-      background:linear-gradient(180deg,rgba(7,3,4,.01),rgba(7,3,4,.63));
-      opacity:.86;
-      transition:.25s ease;
-    }
-
-    .gallery-item::after{
-      content:"↗";
-      position:absolute;
-      right:16px;
-      top:14px;
-      z-index:2;
-      width:33px;
-      height:33px;
-      display:grid;
-      place-items:center;
-      border:1px solid rgba(255,226,233,.70);
-      border-radius:50%;
-      color:#fff;
-      opacity:0;
-      transform:translateY(7px);
-      transition:.25s ease;
-    }
-
-    .gallery-item:hover{transform:translateY(-3px)}
-    .gallery-item:hover::before{opacity:.58}
-    .gallery-item:hover::after{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    .gallery-item--tall{grid-row:span 2}
-    .gallery-item--wide{grid-column:span 2}
-
-    .gallery-label{
-      position:absolute;
-      z-index:2;
-      left:18px;
-      right:18px;
-      bottom:15px;
-      text-align:left;
-      color:#fff;
-    }
-
-    .gallery-label strong{
-      display:block;
-      font:500 30px/1 "Cormorant Garamond",Georgia,serif;
-    }
-
-    .gallery-label span{
-      display:block;
-      margin-top:5px;
-      color:#f7dce2;
-      font-size:10px;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-    }
-
-    /* LES CHIFFRES */
-
-    .numbers-section{
-      position:relative;
-      overflow:hidden;
-      padding:120px 0;
-      background:
-        linear-gradient(90deg,rgba(7,4,5,.90),rgba(7,4,5,.35),rgba(7,4,5,.90)),
-        url("../../images/demo-numbers.webp") center/cover;
-    }
-
-    .numbers-head{text-align:center}
-    .numbers-head .chapter-index{justify-content:center}
-
-    .numbers-head .chapter-title{
-      max-width:760px;
-      margin-left:auto;
-      margin-right:auto;
-    }
-
-    .numbers-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:1px;
-      margin-top:57px;
-      background:rgba(255,199,211,.19);
-      border:1px solid rgba(255,199,211,.20);
-    }
-
-    .number{
-      padding:31px 22px;
-      background:rgba(12,6,8,.72);
-      text-align:center;
-      backdrop-filter:blur(6px);
-    }
-
-    .number strong{
-      display:block;
-      color:#fff;
-      font:500 clamp(43px,5vw,70px)/.9 "Cormorant Garamond",Georgia,serif;
-    }
-
-    .number span{
-      display:block;
-      margin-top:8px;
-      color:#f8dce3;
-      font-size:10px;
-      line-height:1.45;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-    }
-
-    /* LETTRE */
-
-    .letter-section{padding:118px 0}
-
-    .letter{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      overflow:hidden;
-      background:var(--paper);
-      color:var(--paper-ink);
-    }
-
-    .letter-photo{
-      min-height:660px;
-      background:
-        linear-gradient(180deg,rgba(7,3,4,.02),rgba(7,3,4,.30)),
-        url("../../images/demo-letter.webp") center/cover;
-    }
-
-    .letter-copy{
-      align-self:center;
-      padding:clamp(38px,6vw,82px);
-      background:
-        radial-gradient(circle at 80% 11%,rgba(239,142,163,.24),transparent 38%),
-        var(--paper);
-    }
-
-    .letter-copy small{
-      color:#aa405e;
-      font-size:10px;
-      font-weight:700;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-    }
-
-    .letter-title{
-      margin:18px 0 0;
-      font:500 clamp(49px,6vw,78px)/.82 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:-.045em;
-    }
-
-    .letter-title span{
-      margin-top:10px;
-      color:#c04d6b;
-    }
-
-    .letter-copy p{
-      max-width:480px;
-      margin:24px 0 0;
-      color:#5f414a;
-      font-size:14px;
-      line-height:1.80;
-    }
-
-    .signature{
-      margin-top:28px!important;
-      color:#b34563!important;
-      font:400 55px/.7 "Allura","Brush Script MT",cursive!important;
-    }
-
-    /* SECTION VIDEO */
-
-    .film-section{
-      min-height:80svh;
-      position:relative;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      isolation:isolate;
-      text-align:center;
-    }
-
-    .film-section::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      z-index:-2;
-      background:
-        linear-gradient(180deg,rgba(7,3,4,.32),rgba(7,3,4,.79)),
-        url("../../images/demo-film.webp") center/cover;
-      transform:scale(1.04);
-    }
-
-    .film-section::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      z-index:-1;
-      background:radial-gradient(circle at 50% 45%,rgba(240,125,155,.20),transparent 37%);
-    }
-
-    .film-content{
-      width:min(720px,calc(100% - 44px));
-    }
-
-    .film-content p:first-child{
-      color:#ffcbd5;
-      font-size:10px;
-      font-weight:700;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-    }
-
-    .film-title{
-      margin:16px 0 0;
-      font:500 clamp(50px,7vw,91px)/.84 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:-.045em;
-    }
-
-    .film-title span{margin-top:12px}
-
-    .play-memory{
-      width:82px;
-      height:82px;
-      display:grid;
-      place-items:center;
-      margin:30px auto 0;
-      border:1px solid rgba(255,222,230,.80);
-      border-radius:50%;
-      background:rgba(255,255,255,.05);
-      color:#fff;
-      font-size:24px;
-      cursor:pointer;
-      transition:.2s ease;
-    }
-
-    .play-memory:hover{
-      transform:scale(1.06);
-      background:rgba(239,127,157,.30);
-    }
-
-    .film-note{
-      margin:16px auto 0!important;
-      color:#f3dce1!important;
-      font-size:12px!important;
-      font-weight:400!important;
-      letter-spacing:0!important;
-      text-transform:none!important;
-    }
-
-    /* FINAL */
-
-    .finale{
-      min-height:100svh;
-      position:relative;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      text-align:center;
-      isolation:isolate;
-      background:var(--black);
-    }
-
-    .finale::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      z-index:-2;
-      background:
-        linear-gradient(180deg,rgba(7,3,4,.63),rgba(7,3,4,.77)),
-        url("../../images/demo-final.webp") center/cover;
-      transform:scale(1.04);
-      animation:finalMove 20s ease-in-out infinite alternate;
-    }
-
-    @keyframes finalMove{
-      from{transform:scale(1.04)}
-      to{transform:scale(1.12) translateY(-1%)}
-    }
-
-    .finale::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      z-index:-1;
-      background:radial-gradient(circle at 50% 46%,rgba(232,97,133,.24),transparent 37%);
-    }
-
-    .final-inner{
-      width:min(870px,calc(100% - 44px));
-    }
-
-    .final-title{
-      margin:20px 0 0;
-      font:500 clamp(58px,9vw,125px)/.76 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:-.057em;
-    }
-
-    .final-title span{margin-top:14px}
-
-    .final-copy{
-      max-width:535px;
-      margin:27px auto 0;
-      color:#f7e4e9;
-      font-size:14px;
-      line-height:1.66;
-    }
-
-    .final-actions{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:31px;
-    }
-
-    .button-outline{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:52px;
-      padding:0 23px;
-      border:1px solid rgba(255,207,217,.56);
-      border-radius:999px;
-      color:#fff;
-      font-size:12px;
-      transition:.2s ease;
-    }
-
-    .button-outline:hover{background:rgba(239,127,157,.14)}
-
-    /* FOOTER */
-
-    .story-footer{
-      padding:40px 20px;
-      background:#070506;
-      text-align:center;
-    }
-
-    .story-footer p{
-      margin:0;
-      color:#bfaab1;
-      font-size:10px;
-      letter-spacing:.13em;
-      text-transform:uppercase;
-    }
-
-    .story-footer a{
-      display:inline-flex;
-      margin-top:17px;
-      color:var(--rose-soft);
-      font-size:12px;
-      font-weight:700;
-    }
-
-    /* LIGHTBOX */
-
-    .lightbox{
-      position:fixed;
-      inset:0;
-      z-index:950;
-      display:none;
-      place-items:center;
-      padding:24px;
-      border:0;
-      background:rgba(5,3,4,.95);
-      backdrop-filter:blur(16px);
-    }
-
-    .lightbox.is-open{display:grid}
-
-    .lightbox img{
-      max-width:min(100%,1140px);
-      max-height:82svh;
-      object-fit:contain;
-      box-shadow:0 30px 80px rgba(0,0,0,.62);
-    }
-
-    .lightbox-close{
-      position:absolute;
-      top:20px;
-      right:24px;
-      width:42px;
-      height:42px;
-      display:grid;
-      place-items:center;
-      border:1px solid rgba(255,205,216,.52);
-      border-radius:50%;
-      background:rgba(255,255,255,.06);
-      color:#fff;
-      font-size:24px;
-      cursor:pointer;
-    }
-
-    /* ANIMATION */
-
-    .reveal{
-      opacity:0;
-      transform:translateY(34px);
-      transition:opacity .86s cubic-bezier(.2,.75,.2,1),transform .86s cubic-bezier(.2,.75,.2,1);
-    }
-
-    .reveal.is-visible{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    .reveal-delay{transition-delay:.16s}
-
-    /* MOBILE */
+      transform:scale(1.04);animation:heroMove 24s ease-in-out infinite alternate;
+    }
+    .hero:after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 58% 7%,rgba(255,145,175,.17),transparent 45%),radial-gradient(circle at 80% 33%,rgba(245,120,153,.18),transparent 19%);mix-blend-mode:screen}
+    @keyframes heroMove{from{transform:scale(1.04)}to{transform:scale(1.13) translate3d(-1.2%,1%,0)}}
+    .hero-heart{position:absolute;right:6%;top:16%;width:min(39vw,540px);aspect-ratio:1.06;opacity:.74;filter:drop-shadow(0 0 17px rgba(245,110,146,.5));pointer-events:none}
+    .hero-heart:before,.hero-heart:after{content:"";position:absolute;top:18%;width:49%;height:70%;border:4px solid rgba(255,144,172,.86);border-bottom:0;border-radius:50% 50% 0 0}
+    .hero-heart:before{left:10%;transform:rotate(-43deg);transform-origin:100% 100%}
+    .hero-heart:after{right:10%;transform:rotate(43deg);transform-origin:0 100%}
+    .shell{width:min(var(--max),calc(100% - 44px));margin:auto}
+    .hero-title{margin:13px 0 0;max-width:830px;font:500 clamp(82px,11.8vw,160px)/.68 "Cormorant Garamond",Georgia,serif;letter-spacing:-.06em}
+    .hero-title span{display:block;margin-top:16px;color:var(--rose-soft);font:400 .67em/.71 "Allura","Brush Script MT",cursive;letter-spacing:0}
+    .hero-copy{max-width:415px;margin:30px 0 0;color:#f4e6e9;font-size:14px;line-height:1.67}
+    .hero-meta{display:flex;flex-wrap:wrap;gap:16px;margin-top:28px;color:#f5dfe5;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+    .hero-meta span{display:inline-flex;align-items:center;gap:9px}.hero-meta span:before{content:"";width:25px;height:1px;background:var(--rose)}
+
+    /* Shared */
+    .section{padding:124px 0}
+    .reveal{opacity:0;transform:translateY(35px);transition:opacity .85s cubic-bezier(.2,.75,.2,1),transform .85s cubic-bezier(.2,.75,.2,1)}
+    .reveal.show{opacity:1;transform:none}
+    .chapter{display:flex;align-items:center;gap:12px;color:var(--rose-soft);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+    .chapter:before{content:attr(data-n);display:grid;place-items:center;width:43px;height:43px;border:1px solid rgba(246,141,165,.6);border-radius:50%;font:500 19px/1 "Cormorant Garamond",Georgia,serif;letter-spacing:0}
+    .title{margin:21px 0 0;font:500 clamp(49px,6vw,80px)/.89 "Cormorant Garamond",Georgia,serif;letter-spacing:-.044em}
+    .title span{display:block;margin-top:7px;color:var(--rose-soft);font:400 .77em/.74 "Allura","Brush Script MT",cursive;letter-spacing:0}
+    .copy{max-width:490px;margin:22px 0 0;color:var(--muted);font-size:14px;line-height:1.78}
+    .date{display:inline-flex;align-items:center;gap:11px;margin-top:26px;color:#fff0f3;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+    .date:before{content:"";width:43px;height:1px;background:var(--rose)}
+
+    /* Chapter one */
+    .opening{display:grid;grid-template-columns:.84fr 1.16fr;gap:clamp(28px,6vw,92px);align-items:center}
+    .photo-tall{min-height:650px;position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(7,3,4,.02),rgba(7,3,4,.61)),url("../../images/demo-01.webp") center/cover;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+    .photo-tall:after{content:"";position:absolute;left:-33px;bottom:-33px;width:54%;aspect-ratio:1;border:1px solid rgba(247,145,169,.52);border-radius:50%}
+    .photo-caption{position:absolute;right:27px;bottom:24px;max-width:260px;color:#fff;font:400 39px/1 "Allura","Brush Script MT",cursive;text-align:right;text-shadow:0 5px 22px rgba(0,0,0,.44)}
+
+    /* Full beach moment */
+    .moment{min-height:92svh;position:relative;display:grid;place-items:center;overflow:hidden;isolation:isolate;text-align:center}
+    .moment:before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(7,3,4,.26),rgba(7,3,4,.82)),url("../../images/demo-02.webp") center/cover;transform:scale(1.04);animation:momentMove 20s ease-in-out infinite alternate}
+    .moment:after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 50% 44%,rgba(239,125,155,.22),transparent 37%)}
+    @keyframes momentMove{from{transform:scale(1.04)}to{transform:scale(1.12) translateY(-1%)}}
+    .moment-inner{width:min(820px,calc(100% - 44px))}
+    .moment h2{margin:18px 0 0;font:500 clamp(55px,8vw,112px)/.77 "Cormorant Garamond",Georgia,serif;letter-spacing:-.055em}
+    .moment h2 span{display:block;margin-top:13px;color:var(--rose-soft);font:400 .66em/.72 "Allura","Brush Script MT",cursive;letter-spacing:0}
+    .moment p{max-width:530px;margin:24px auto 0;color:#f7e4e9;font-size:14px;line-height:1.68}
+
+    /* Street carousel */
+    .street-section{padding:120px 0;background:linear-gradient(180deg,rgba(44,13,25,.9),rgba(8,5,7,.96))}
+    .street-head{display:grid;grid-template-columns:.88fr 1.12fr;gap:clamp(28px,6vw,80px);align-items:end;margin-bottom:40px}
+    .street-gallery{display:grid;grid-template-columns:1.08fr .92fr .92fr;grid-auto-rows:250px;gap:14px}
+    .street-card{position:relative;overflow:hidden;background:var(--img) center/cover;isolation:isolate;transition:transform .3s ease}
+    .street-card:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,3,4,.04),rgba(7,3,4,.69))}
+    .street-card:hover{transform:translateY(-5px)}
+    .street-card.tall{grid-row:span 2}.street-card.wide{grid-column:span 2}
+    .street-card .label{position:absolute;z-index:2;left:21px;right:21px;bottom:18px}
+    .street-card strong{display:block;color:#fff;font:500 34px/1 "Cormorant Garamond",Georgia,serif}
+    .street-card span{display:block;margin-top:6px;color:#f6dce2;font-size:10px;letter-spacing:.11em;text-transform:uppercase}
+
+    /* Quote */
+    .quote-block{padding:145px 0;position:relative;overflow:hidden;text-align:center;background:radial-gradient(circle at 50% 44%,rgba(190,43,80,.25),transparent 42%),linear-gradient(180deg,rgba(49,14,26,.93),rgba(8,5,7,.98));border-top:1px solid rgba(255,199,211,.09);border-bottom:1px solid rgba(255,199,211,.09)}
+    .quote-block:before,.quote-block:after{content:"♡";position:absolute;color:rgba(248,129,159,.14);font:400 clamp(200px,26vw,380px)/1 "Cormorant Garamond",Georgia,serif;pointer-events:none}
+    .quote-block:before{top:8%;left:-6%}.quote-block:after{right:-7%;bottom:-4%;transform:rotate(18deg)}
+    .quote{position:relative;z-index:1;width:min(900px,calc(100% - 44px));margin:auto;font:500 clamp(42px,6.6vw,85px)/.97 "Cormorant Garamond",Georgia,serif;letter-spacing:-.04em}
+    .quote span{display:block;margin-top:23px;color:var(--rose-soft);font:400 clamp(53px,6vw,82px)/.7 "Allura","Brush Script MT",cursive}
+
+    /* Letter */
+    .letter{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;background:var(--cream);color:#351720}
+    .letter-photo{min-height:670px;background:linear-gradient(180deg,rgba(7,3,4,.02),rgba(7,3,4,.32)),url("../../images/demo-04.webp") center/cover}
+    .letter-copy{align-self:center;padding:clamp(38px,6vw,82px);background:radial-gradient(circle at 80% 11%,rgba(239,142,163,.24),transparent 38%),var(--cream)}
+    .letter-copy small{color:#aa405e;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+    .letter-copy h2{margin:18px 0 0;font:500 clamp(49px,6vw,78px)/.82 "Cormorant Garamond",Georgia,serif;letter-spacing:-.045em}
+    .letter-copy h2 span{display:block;margin-top:10px;color:#c04d6b;font:400 .76em/.73 "Allura","Brush Script MT",cursive;letter-spacing:0}
+    .letter-copy p{max-width:480px;margin:24px 0 0;color:#5f414a;font-size:14px;line-height:1.8}
+    .signature{margin-top:29px!important;color:#b34563!important;font:400 55px/.7 "Allura","Brush Script MT",cursive!important}
+
+    /* Last beach */
+    .finale{min-height:100svh;position:relative;display:grid;place-items:center;overflow:hidden;text-align:center;isolation:isolate}
+    .finale:before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(7,3,4,.64),rgba(7,3,4,.80)),url("../../images/demo-03.webp") center/cover;transform:scale(1.05);animation:finalMove 22s ease-in-out infinite alternate}
+    .finale:after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 50% 46%,rgba(232,97,133,.23),transparent 37%)}
+    @keyframes finalMove{from{transform:scale(1.05)}to{transform:scale(1.14) translateY(-1%)}}
+    .finale-inner{width:min(880px,calc(100% - 44px))}
+    .finale h2{margin:20px 0 0;font:500 clamp(59px,9vw,125px)/.76 "Cormorant Garamond",Georgia,serif;letter-spacing:-.057em}
+    .finale h2 span{display:block;margin-top:14px;color:var(--rose-soft);font:400 .66em/.72 "Allura","Brush Script MT",cursive;letter-spacing:0}
+    .finale-copy{max-width:550px;margin:27px auto 0;color:#f7e4e9;font-size:14px;line-height:1.68}
+    .actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:31px}
+    .ghost{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 23px;border:1px solid rgba(255,207,217,.56);border-radius:999px;color:#fff;font-size:12px;transition:.2s ease}
+    .ghost:hover{background:rgba(239,127,157,.14)}
+    .footer{padding:40px 20px;background:#070506;text-align:center}.footer p{margin:0;color:#bfaab1;font-size:10px;letter-spacing:.13em;text-transform:uppercase}.footer a{display:inline-flex;margin-top:17px;color:var(--rose-soft);font-size:12px;font-weight:700}
 
     @media(max-width:900px){
-      .header-label{display:none}
-      .hero-heart{width:61vw;right:-3%;top:17%}
-      .first-chapter,
-      .gallery-intro{grid-template-columns:1fr}
-      .first-photo{
-        min-height:500px;
-        max-width:650px;
-        width:100%;
-        margin:0 auto;
-      }
-      .timeline-item{
-        grid-template-columns:1fr 54px 1fr;
-        gap:15px;
-      }
-      .letter{grid-template-columns:1fr}
-      .letter-photo{min-height:420px}
+      .names{display:none}.hero-heart{width:61vw;right:-3%;top:17%}
+      .opening,.street-head{grid-template-columns:1fr}
+      .photo-tall{min-height:500px;max-width:650px;width:100%;margin:0 auto}
+      .letter{grid-template-columns:1fr}.letter-photo{min-height:430px}
     }
-
     @media(max-width:580px){
-      .story-nav{
-        width:min(100% - 26px,var(--max));
-        min-height:65px;
-      }
-
-      .brand-name{
-        font-size:13px;
-        letter-spacing:.17em;
-      }
-
-      .brand-sub{font-size:6px}
-      .back-link{padding:8px 11px;font-size:9px}
-      .sound-button{width:35px;height:35px}
-
-      .hero{padding:105px 0 48px}
-
-      .hero-content,
-      .shell{
-        width:min(100% - 28px,var(--max));
-      }
-
-      .hero-title{font-size:80px}
-      .hero-copy{max-width:315px;font-size:13px}
-      .hero-heart{
-        top:27%;
-        right:-13%;
-        width:84vw;
-      }
-
-      .story-section{padding:80px 0}
-      .chapter-title{font-size:49px}
-
-      .first-photo{min-height:420px}
-
-      .first-photo::before{
-        left:-15px;
-        bottom:-15px;
-      }
-
-      .timeline-section{padding:80px 0}
-      .timeline-section::before{left:25px}
-
-      .timeline{
-        gap:30px;
-        margin-top:42px;
-      }
-
-      .timeline-item,
-      .timeline-item:nth-child(even){
-        grid-template-columns:45px 1fr;
-        gap:13px;
-      }
-
-      .timeline-marker,
-      .timeline-item:nth-child(even) .timeline-marker{
-        grid-column:1;
-        grid-row:1;
-        align-self:start;
-        width:45px;
-        height:45px;
-        font-size:15px;
-      }
-
-      .timeline-photo,
-      .timeline-item:nth-child(even) .timeline-photo{
-        display:none;
-      }
-
-      .timeline-copy,
-      .timeline-item:nth-child(even) .timeline-copy{
-        grid-column:2;
-        grid-row:1;
-        text-align:left;
-      }
-
-      .timeline-copy h3{font-size:28px}
-
-      .quote-section{padding:91px 0}
-      .quote{font-size:45px}
-
-      .gallery{
-        grid-template-columns:1fr 1fr;
-        grid-auto-rows:180px;
-        gap:9px;
-      }
-
-      .gallery-item--tall{grid-row:span 2}
-      .gallery-item--wide{grid-column:span 2}
-
-      .gallery-label strong{font-size:24px}
-
-      .numbers-section{padding:80px 0}
-
-      .numbers-grid{
-        grid-template-columns:1fr 1fr;
-        margin-top:38px;
-      }
-
-      .number{padding:24px 12px}
-
-      .letter-copy{padding:36px 26px}
-      .letter-title{font-size:55px}
-
-      .film-section{min-height:72svh}
-      .final-title{font-size:70px}
-      .entry-title{font-size:78px}
-      .entry-copy{font-size:13px}
+      .nav{width:min(100% - 26px,var(--max));min-height:65px}.brand-title{font-size:13px;letter-spacing:.17em}.brand-sub{font-size:6px}.back{padding:8px 11px;font-size:9px}.sound{width:35px;height:35px}
+      .hero{padding:105px 0 48px}.shell,.hero-content{width:min(100% - 28px,var(--max))}.hero-title{font-size:80px}.hero-copy{max-width:315px;font-size:13px}.hero-heart{top:27%;right:-13%;width:84vw}
+      .section{padding:80px 0}.title{font-size:49px}.photo-tall{min-height:420px}.photo-tall:after{left:-15px;bottom:-15px}.moment{min-height:76svh}.moment h2{font-size:66px}
+      .street-section{padding:80px 0}.street-gallery{grid-template-columns:1fr 1fr;grid-auto-rows:185px;gap:9px}.street-card.tall{grid-row:span 2}.street-card.wide{grid-column:span 2}.street-card strong{font-size:24px}
+      .quote-block{padding:91px 0}.quote{font-size:46px}.letter-copy{padding:36px 26px}.letter-copy h2{font-size:55px}.finale h2{font-size:70px}.entry h1{font-size:78px}.entry-copy{font-size:13px}
     }
-  </style></head><body>
-  <div class="scroll-progress" aria-hidden="true"><span data-progress></span></div>  <section class="entry" data-entry>
+  </style>
+</head>
+
+<body>
+  <div class="progress" aria-hidden="true"><span data-progress></span></div>
+
+  <section class="entry" data-entry>
     <div class="entry-inner">
-      <p class="entry-kicker">Pour Angélique · De la part d’Arnaud</p>
-      <h1 class="entry-title">Pour nous,<span>j’ai gardé ces moments.</span></h1>
-      <p class="entry-copy">Pas un cadeau qu’on pose sur une étagère. Quelques pages qui racontent ce qu’on a vécu, ce que je garde, et tout ce que je veux encore vivre avec toi, Angélique.</p>
-      <button class="button-main" type="button" data-enter>Tu es prête ? <span aria-hidden="true">♡</span></button>
+      <p class="eyebrow">Pour Angélique · de la part d’Arnaud</p>
+      <h1>Pour nous,<span>j’ai gardé ces moments.</span></h1>
+      <p class="entry-copy">Pas un cadeau qu’on pose sur une étagère. Juste une histoire à ouvrir, en images, en musique, et avec tout ce qu’on a encore à vivre.</p>
+      <button class="cta" type="button" data-enter>Entrer dans notre histoire <span aria-hidden="true">♡</span></button>
       <p class="entry-note">Prends ton temps. Cette histoire est pour toi, Angélique.</p>
     </div>
-  </section>  <header class="story-header" data-header>
-    <nav class="story-nav">
+  </section>
+
+  <header class="topbar" data-header>
+    <nav class="nav">
       <a class="brand" href="../../index.html" aria-label="Retour à MakeYourStory">
         <span class="brand-mark" aria-hidden="true">M</span>
-        <span>
-          <span class="brand-name">MAKE YOUR STORY</span>
-          <span class="brand-sub">HISTOIRE DÉMONSTRATION</span>
-        </span>
-      </a>  <div class="header-actions">
-    <span class="header-label">Arnaud & Angélique</span>
-    <button class="sound-button" type="button" aria-label="Activer ou couper la musique" aria-pressed="false" data-sound>♪</button>
-    <a class="back-link" href="../../index.html">Retour au site</a>
-  </div>
-</nav>
+        <span><span class="brand-title">MAKE YOUR STORY</span><span class="brand-sub">HISTOIRE DÉMONSTRATION</span></span>
+      </a>
+      <div class="nav-actions">
+        <span class="names">Arnaud & Angélique</span>
+        <button class="sound" type="button" aria-label="Couper ou remettre la musique" aria-pressed="false" data-sound>♪</button>
+        <a class="back" href="../../index.html">Retour au site</a>
+      </div>
+    </nav>
+  </header>
 
-  </header>  <audio id="story-audio" preload="auto" loop>
+  <audio id="story-audio" preload="auto" loop>
     <source src="../../audio/demo-love.mp3" type="audio/mpeg">
-  </audio>  <main>
+  </audio>
+
+  <main>
     <section class="hero">
-      <div class="hero-heart" aria-hidden="true"></div>  <div class="hero-content">
-    <p class="hero-kicker">Notre histoire · depuis le 14 juin 2021</p>
-    <h1 class="hero-title">Camille<span>& Thomas</span></h1>
-    <p class="hero-copy">Il y a des rencontres qui changent une journée. Et puis il y a celles qui changent tout ce qui vient après.</p>
-
-    <div class="hero-meta">
-      <span>Une histoire à deux</span>
-      <span>À découvrir sans se presser</span>
-    </div>
-  </div>
-</section>
-
-<section class="story-section">
-  <div class="shell first-chapter">
-    <div class="reveal">
-      <p class="chapter-index" data-number="01">Le début</p>
-      <h2 class="chapter-title">Tout a commencé<span>sans qu’on le sache.</span></h2>
-      <p class="chapter-copy">Une conversation un peu trop longue. Un premier rire. Une façon de se regarder qui disait déjà beaucoup plus que tout le reste.</p>
-      <p class="date-line">14 juin 2021 · 22 h 47</p>
-    </div>
-
-    <div class="first-photo reveal reveal-delay">
-      <p class="photo-note">Le début de tout.</p>
-    </div>
-  </div>
-</section>
-
-<section class="timeline-section">
-  <div class="shell">
-    <div class="timeline-head reveal">
-      <p class="chapter-index" data-number="02">Les premières fois</p>
-      <h2 class="chapter-title">On n’a rien prévu.<span>C’est pour ça que c’était si beau.</span></h2>
-      <p class="chapter-copy">Quelques dates que personne d’autre ne remarquerait. Pour nous, elles ont tout changé.</p>
-    </div>
-
-    <div class="timeline">
-      <article class="timeline-item reveal">
-        <div class="timeline-copy">
-          <h3>Le premier vrai rendez-vous.</h3>
-          <p>Ce café qui devait durer une heure. On est restés jusqu’à ce que le serveur commence à ranger les chaises.</p>
-          <small>21 juin 2021</small>
-        </div>
-
-        <div class="timeline-marker">01</div>
-
-        <div class="timeline-photo" style="--photo:url('../../images/demo-timeline-01.webp')"></div>
-      </article>
-
-      <article class="timeline-item reveal">
-        <div class="timeline-copy">
-          <h3>Le premier “tu me manques”.</h3>
-          <p>Pas spectaculaire. Juste vrai. Et c’est là que j’ai compris que j’avais envie de tout raconter avec toi.</p>
-          <small>03 juillet 2021</small>
-        </div>
-
-        <div class="timeline-marker">02</div>
-
-        <div class="timeline-photo" style="--photo:url('../../images/demo-timeline-02.webp')"></div>
-      </article>
-
-      <article class="timeline-item reveal">
-        <div class="timeline-copy">
-          <h3>Le premier voyage sans plan.</h3>
-          <p>Quelques kilomètres, une playlist trop forte, et cette impression de déjà être à la bonne place.</p>
-          <small>19 août 2021</small>
-        </div>
-
-        <div class="timeline-marker">03</div>
-
-        <div class="timeline-photo" style="--photo:url('../../images/demo-timeline-03.webp')"></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="quote-section">
-  <p class="quote reveal">« Ce n’est pas le nombre de jours.<span>C’est tout ce qu’ils ont rempli. »</span></p>
-</section>
-
-<section class="story-section">
-  <div class="shell">
-    <div class="gallery-intro">
-      <div class="reveal">
-        <p class="chapter-index" data-number="03">Nos souvenirs</p>
-        <h2 class="chapter-title">Les preuves qu’on a<span>vraiment vécu tout ça.</span></h2>
+      <div class="hero-heart" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="eyebrow">Notre histoire · depuis le premier jour</p>
+        <h1 class="hero-title">Arnaud<span>& Angélique</span></h1>
+        <p class="hero-copy">Il y a des rencontres qui changent une journée. Et puis il y a celles qui changent tout ce qui vient après.</p>
+        <div class="hero-meta"><span>Une histoire à deux</span><span>À découvrir sans se presser</span></div>
       </div>
+    </section>
 
-      <p class="chapter-copy reveal reveal-delay">Les photos parfaites sont belles. Mais ce sont souvent les autres qui nous ressemblent le plus : les floues, les imprévues, celles prises sans y penser.</p>
-    </div>
-
-    <div class="gallery">
-      <button class="gallery-item gallery-item--tall reveal" type="button" style="--image:url('../../images/demo-gallery-01.webp')" data-lightbox="../../images/demo-gallery-01.webp">
-        <span class="gallery-label">
-          <strong>Nos premiers week-ends.</strong>
-          <span>Sans plan, mais jamais sans envie.</span>
-        </span>
-      </button>
-
-      <button class="gallery-item reveal" type="button" style="--image:url('../../images/demo-gallery-02.webp')" data-lightbox="../../images/demo-gallery-02.webp">
-        <span class="gallery-label">
-          <strong>Après la pluie.</strong>
-          <span>Et toujours ce rire.</span>
-        </span>
-      </button>
-
-      <button class="gallery-item reveal reveal-delay" type="button" style="--image:url('../../images/demo-gallery-03.webp')" data-lightbox="../../images/demo-gallery-03.webp">
-        <span class="gallery-label">
-          <strong>Le monde autour.</strong>
-          <span>Un peu moins important.</span>
-        </span>
-      </button>
-
-      <button class="gallery-item gallery-item--wide reveal" type="button" style="--image:url('../../images/demo-gallery-04.webp')" data-lightbox="../../images/demo-gallery-04.webp">
-        <span class="gallery-label">
-          <strong>Nous deux, juste là.</strong>
-          <span>Et c’était largement suffisant.</span>
-        </span>
-      </button>
-    </div>
-  </div>
-</section>
-
-<section class="numbers-section">
-  <div class="shell">
-    <div class="numbers-head reveal">
-      <p class="chapter-index" data-number="04">Notre petite folie</p>
-      <h2 class="chapter-title">Ce que les chiffres<span>ne disent pas vraiment.</span></h2>
-    </div>
-
-    <div class="numbers-grid">
-      <article class="number reveal">
-        <strong>1 097</strong>
-        <span>jours à s’aimer<br>un peu plus fort</span>
-      </article>
-
-      <article class="number reveal reveal-delay">
-        <strong>27</strong>
-        <span>week-ends à partir<br>sans programme</span>
-      </article>
-
-      <article class="number reveal">
-        <strong>∞</strong>
-        <span>fous rires à ne<br>jamais compter</span>
-      </article>
-
-      <article class="number reveal reveal-delay">
-        <strong>1</strong>
-        <span>personne avec qui<br>je recommencerais tout</span>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="letter-section">
-  <div class="shell">
-    <article class="letter reveal">
-      <div class="letter-photo" role="img" aria-label="Souvenir tendre d’Arnaud et Angélique"></div>
-
-      <div class="letter-copy">
-        <small>La partie que je ne savais pas dire</small>
-
-        <h2 class="letter-title">Pour Angélique,<span>encore et toujours.</span></h2>
-
-        <p>Je ne savais pas comment t’offrir tout ce que tu représentes. Alors j’ai rassemblé quelques morceaux de nous : les photos, les détails, les moments qu’on aurait pu laisser filer.</p>
-
-        <p>Parce que tu mérites de savoir que je me souviens. Et que, parmi toutes les choses que je choisirais encore, il y a toi.</p>
-
-        <p>Je veux que tu gardes cette page comme on garde une main, une odeur, une chanson : sans avoir besoin de l’expliquer.</p>
-
-        <p class="signature">Arnaud ♡</p>
+    <section class="section">
+      <div class="shell opening">
+        <div class="reveal">
+          <p class="chapter" data-n="01">Le début</p>
+          <h2 class="title">Tout a commencé<span>sans qu’on le sache.</span></h2>
+          <p class="copy">Un regard un peu trop long. Un rire au bon moment. Puis cette impression étrange d’avoir envie de raconter les jours à venir avec la même personne.</p>
+          <p class="date">Le premier de beaucoup de souvenirs</p>
+        </div>
+        <div class="photo-tall reveal"><p class="photo-caption">Le début de tout.</p></div>
       </div>
-    </article>
-  </div>
-</section>
+    </section>
 
-<section class="film-section">
-  <div class="film-content reveal">
-    <p>Un souvenir en mouvement</p>
+    <section class="moment">
+      <div class="moment-inner reveal">
+        <p class="eyebrow">Les couchers de soleil n’étaient jamais vraiment les mêmes</p>
+        <h2>Mais avec toi,<span>ils avaient toujours la même lumière.</span></h2>
+        <p>Les plages, le vent, les fins de journée, les silences qui ne sont jamais vides. C’est peut-être ça, le bonheur : reconnaître un endroit parce que tu y es.</p>
+      </div>
+    </section>
 
-    <h2 class="film-title">Et si notre histoire<span>avait une bande-annonce ?</span></h2>
+    <section class="street-section">
+      <div class="shell">
+        <div class="street-head">
+          <div class="reveal">
+            <p class="chapter" data-n="02">Nos escapades</p>
+            <h2 class="title">Des rues, des détours,<span>et toujours nous deux.</span></h2>
+          </div>
+          <p class="copy reveal">Les plus beaux souvenirs ne préviennent pas. Ils commencent souvent par “on va juste marcher un peu” et finissent par devenir des soirées qu’on voudrait garder entières.</p>
+        </div>
 
-    <button class="play-memory" type="button" aria-label="Ouvrir le souvenir vidéo" data-video>▷</button>
+        <div class="street-gallery">
+          <div class="street-card tall reveal" style="--img:url('../../images/demo-03.webp')">
+            <div class="label"><strong>Nos rues.</strong><span>Quelques lumières et beaucoup de nous.</span></div>
+          </div>
+          <div class="street-card reveal" style="--img:url('../../images/demo-04.webp')">
+            <div class="label"><strong>Sans plan.</strong><span>Mais toujours ensemble.</span></div>
+          </div>
+          <div class="street-card reveal" style="--img:url('../../images/demo-02.webp')">
+            <div class="label"><strong>Le monde autour.</strong><span>Un peu moins important.</span></div>
+          </div>
+          <div class="street-card wide reveal" style="--img:url('../../images/demo-intro.webp')">
+            <div class="label"><strong>Nous deux, juste là.</strong><span>Et c’était largement suffisant.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <p class="film-note">Clique ici : cet emplacement pourra contenir une vidéo personnelle du couple.</p>
-  </div>
-</section>
+    <section class="quote-block">
+      <p class="quote reveal">« Ce n’est pas le nombre de jours.<span>C’est tout ce qu’ils ont rempli. »</span></p>
+    </section>
 
-<section class="finale">
-  <div class="final-inner reveal">
-    <p class="final-kicker">La suite ne tient pas encore dans une photo</p>
+    <section class="section">
+      <div class="shell letter reveal">
+        <div class="letter-photo" role="img" aria-label="Arnaud et Angélique lors d’un souvenir au bord de la mer"></div>
+        <div class="letter-copy">
+          <small>Ce que je voulais te dire</small>
+          <h2>Pour Angélique,<span>encore et toujours.</span></h2>
+          <p>Je ne savais pas comment t’offrir tout ce que tu représentes. Alors j’ai gardé quelques morceaux de nous : les photos, les détails, les endroits, les moments qu’on aurait pu laisser filer.</p>
+          <p>Parce que tu mérites de savoir que je me souviens. Et que, parmi toutes les choses que je choisirais encore, il y a toi.</p>
+          <p>Je veux qu’on garde cette histoire comme on garde une main, une odeur, une chanson : sans jamais avoir besoin de l’expliquer.</p>
+          <p class="signature">Arnaud ♡</p>
+        </div>
+      </div>
+    </section>
 
-    <h2 class="final-title">Mais je sais<span>avec qui je veux la vivre.</span></h2>
+    <section class="finale">
+      <div class="finale-inner reveal">
+        <p class="eyebrow">La suite ne tient pas encore dans une photo</p>
+        <h2>Mais je sais<span>avec qui je veux la vivre.</span></h2>
+        <p class="finale-copy">Cette page est une démo. Mais le principe, lui, est réel : une histoire personnalisée, une ambiance, une musique, vos images et une émotion qu’on n’oublie pas.</p>
+        <div class="actions">
+          <a class="cta" href="../../commander.html">Créer une histoire comme celle-ci <span aria-hidden="true">♡</span></a>
+          <a class="ghost" href="../../index.html">Découvrir MakeYourStory</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <p class="final-copy">C’est ça que MakeYourStory peut offrir : pas une galerie. Un moment à ouvrir. Une histoire qui fait dire « tu as vraiment pensé à moi ».</p>
-
-    <div class="final-actions">
-      <a class="button-main" href="../../commander.html">Créer une histoire comme celle-ci <span aria-hidden="true">♡</span></a>
-      <a class="button-outline" href="../../index.html">Découvrir MakeYourStory</a>
-    </div>
-  </div>
-</section>
-
-  </main>  <footer class="story-footer">
+  <footer class="footer">
     <p>Démo MakeYourStory · Une marque BASALTE-WEB</p>
     <a href="../../contact.html">Parler de votre propre histoire</a>
-  </footer>  <dialog class="lightbox" data-lightbox-dialog>
-    <button class="lightbox-close" type="button" aria-label="Fermer">×</button>
-    <img src="" alt="Souvenir agrandi" data-lightbox-image>
-  </dialog>  <dialog class="lightbox" data-video-dialog>
-    <button class="lightbox-close" type="button" aria-label="Fermer">×</button><div style="max-width:680px;text-align:center;color:#fff">
-  <p style="margin:0;color:#ffcbd5;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Emplacement vidéo</p>
+  </footer>
 
-  <h2 style="margin:16px 0 0;font:500 clamp(42px,7vw,76px)/.86 'Cormorant Garamond',Georgia,serif">
-    Ici, tu peux intégrer
-    <span style="display:block;color:#ffcbd5;font:400 .73em/.72 'Allura','Brush Script MT',cursive">votre plus beau souvenir en vidéo.</span>
-  </h2>
-
-  <p style="max-width:520px;margin:20px auto 0;color:#ead7dc;font-size:13px;line-height:1.65">
-    Pour une vraie commande, cet emplacement pourra contenir une vidéo MP4, une vidéo YouTube non répertoriée ou un montage souvenir.
-  </p>
-</div>
-
-  </dialog>  <script>
+  <script>
     (() => {
       const entry = document.querySelector("[data-entry]");
-      const enterButton = document.querySelector("[data-enter]");
+      const enter = document.querySelector("[data-enter]");
+      const audio = document.getElementById("story-audio");
+      const sound = document.querySelector("[data-sound]");
       const header = document.querySelector("[data-header]");
       const progress = document.querySelector("[data-progress]");
-      const audio = document.getElementById("story-audio");
-      const soundButton = document.querySelector("[data-sound]");
-      const lightbox = document.querySelector("[data-lightbox-dialog]");
-      const lightboxImage = document.querySelector("[data-lightbox-image]");
-      const videoDialog = document.querySelector("[data-video-dialog]");
-      const videoButton = document.querySelector("[data-video]");
 
       document.body.style.overflow = "hidden";
 
-      const startMusic = async () => {
+      const playMusic = async () => {
         try {
           audio.volume = 0;
           await audio.play();
-
-          soundButton.classList.add("is-on");
-          soundButton.setAttribute("aria-pressed", "true");
-          soundButton.textContent = "❚❚";
+          sound.classList.add("on");
+          sound.setAttribute("aria-pressed", "true");
+          sound.textContent = "❚❚";
 
           let volume = 0;
-          const fadeIn = window.setInterval(() => {
+          const fade = window.setInterval(() => {
             volume += 0.04;
             audio.volume = Math.min(volume, 0.55);
-
-            if (volume >= 0.55) {
-              window.clearInterval(fadeIn);
-            }
+            if (volume >= 0.55) window.clearInterval(fade);
           }, 110);
-        } catch (error) {
-          soundButton.textContent = "♪";
+        } catch {
+          sound.textContent = "♪";
         }
       };
 
-      enterButton.addEventListener("click", () => {
+      enter.addEventListener("click", () => {
         entry.classList.add("is-open");
         document.body.style.overflow = "";
-        startMusic();
+        playMusic();
         setTimeout(() => entry.remove(), 900);
       });
 
-      window.addEventListener("scroll", () => {
-        header.classList.toggle("is-solid", window.scrollY > 25);
-
-        const maximum = document.documentElement.scrollHeight - window.innerHeight;
-        progress.style.width = (maximum ? (window.scrollY / maximum) * 100 : 0) + "%";
-      }, { passive:true });
-
-      soundButton.addEventListener("click", async () => {
+      sound.addEventListener("click", async () => {
         try {
           if (audio.paused) {
             await audio.play();
-            soundButton.classList.add("is-on");
-            soundButton.setAttribute("aria-pressed", "true");
-            soundButton.textContent = "❚❚";
+            audio.volume = 0.55;
+            sound.classList.add("on");
+            sound.setAttribute("aria-pressed", "true");
+            sound.textContent = "❚❚";
           } else {
             audio.pause();
-            soundButton.classList.remove("is-on");
-            soundButton.setAttribute("aria-pressed", "false");
-            soundButton.textContent = "♪";
+            sound.classList.remove("on");
+            sound.setAttribute("aria-pressed", "false");
+            sound.textContent = "♪";
           }
-        } catch (error) {
-          soundButton.textContent = "!";
-          soundButton.title = "Ajoute le fichier audio/demo-love.mp3 pour activer la musique.";
+        } catch {
+          sound.textContent = "!";
+          sound.title = "Vérifie que audio/demo-love.mp3 est bien présent.";
         }
       });
 
+      window.addEventListener("scroll", () => {
+        header.classList.toggle("solid", window.scrollY > 25);
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        progress.style.width = (max ? window.scrollY / max * 100 : 0) + "%";
+      }, { passive:true });
+
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
+            entry.target.classList.add("show");
             observer.unobserve(entry.target);
           }
         });
       }, { threshold:0.16 });
 
-      document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
-
-      document.querySelectorAll("[data-lightbox]").forEach((button) => {
-        button.addEventListener("click", () => {
-          lightboxImage.src = button.dataset.lightbox;
-          lightbox.showModal();
-          lightbox.classList.add("is-open");
-        });
-      });
-
-      videoButton.addEventListener("click", () => {
-        videoDialog.showModal();
-        videoDialog.classList.add("is-open");
-      });
-
-      document.querySelectorAll(".lightbox-close").forEach((button) => {
-        button.addEventListener("click", () => {
-          const dialog = button.closest("dialog");
-          dialog.close();
-          dialog.classList.remove("is-open");
-        });
-      });
-
-      [lightbox, videoDialog].forEach((dialog) => {
-        dialog.addEventListener("click", (event) => {
-          if (event.target === dialog) {
-            dialog.close();
-            dialog.classList.remove("is-open");
-          }
-        });
-      });
+      document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
     })();
-  </script></body>
+  </script>
+</body>
 </html>
