@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080607">
+  <meta name="robots" content="index,follow">
+  <title>MakeYourStory.fr | Offrez une histoire qui reste</title>
+  <meta name="description" content="Photos, vidéos, musique, mots doux et QR Code : MakeYourStory transforme vos souvenirs en une histoire privée, belle et prête à offrir.">
+  <link rel="canonical" href="https://makeyourstory.fr/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MakeYourStory">
+  <meta property="og:title" content="MakeYourStory.fr | Offrez une histoire qui reste">
+  <meta property="og:description" content="Photos, vidéos, musique, mots doux et QR Code : MakeYourStory transforme vos souvenirs en une histoire privée, belle et prête à offrir.">
+  <meta property="og:url" content="https://makeyourstory.fr/">
+  <meta property="og:image" content="https://makeyourstory.fr/images/og-makeyourstory.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MakeYourStory.fr | Offrez une histoire qui reste">
+  <meta name="twitter:description" content="Photos, vidéos, musique, mots doux et QR Code : MakeYourStory transforme vos souvenirs en une histoire privée, belle et prête à offrir.">
+  <meta name="twitter:image" content="https://makeyourstory.fr/images/og-makeyourstory.webp">
+  <link rel="icon" href="images/favicon.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.webp">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/analytics.js" defer></script>
+<script type="application/ld+json">{
+  "@context":"https://schema.org",
+  "@type":"Service",
+  "name":"MakeYourStory",
+  "url":"https://makeyourstory.fr/",
+  "description":"Création de sites souvenirs personnalisés pour couples, mariages, naissances, familles, anniversaires et hommages.",
+  "provider":{"@type":"Organization","name":"BASALTE-WEB","email":"basalteweb@gmail.com","telephone":"+33670396322"}
+}</script>
+<style>
+.hero{position:relative;overflow:hidden;padding:18px 0 10px}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:.92fr 1.08fr;align-items:center;min-height:458px}
+.hero-copy{z-index:4;max-width:545px;padding:31px 8px 35px 12px}
+.hero-kicker{margin:0 0 7px;font:500 31px/1.03 "Cormorant Garamond",Georgia,serif;letter-spacing:-.02em}
+.hero-title{margin:0;color:var(--rose-soft);font:500 44px/1 "Cormorant Garamond",Georgia,serif;letter-spacing:-.02em}
+.hero-script{margin:0 0 11px;color:var(--rose);font:400 83px/.77 "Allura",cursive}
+.hero-lead{max-width:425px;margin:15px 0 21px;color:#f1e5e7;font-size:14px;line-height:1.55}
+.hero-lead b{color:var(--rose-soft)}
+.hero-actions{display:flex;gap:13px;flex-wrap:wrap}
+.hero-note{display:flex;align-items:center;gap:11px;margin-top:27px;color:#e5d4d8;font-size:11px}
+.hero-note::before{content:"";width:37px;height:1px;background:var(--line-strong)}
+.hero-stars{color:var(--rose);font-size:14px;letter-spacing:.12em}
+.hero-visual{height:458px;position:relative;isolation:isolate}
+.hero-photo{position:absolute;right:20px;top:4px;width:91%;height:392px;border-radius:49% 51% 45% 47%/41% 44% 54% 56%;background:linear-gradient(180deg,rgba(9,4,7,0) 43%,rgba(7,3,4,.79) 100%),url("images/hero-couple.webp") 50% 22%/cover;filter:saturate(.93) contrast(1.04);z-index:1}
+.hero-heart{position:absolute;right:4%;top:3px;width:87%;height:357px;z-index:0;filter:drop-shadow(0 0 14px rgba(244,97,136,.55))}
+.hero-heart::before,.hero-heart::after{content:"";position:absolute;top:63px;width:47%;height:69%;border:5px solid rgba(254,134,163,.86);border-bottom:0;border-radius:52% 52% 0 0}
+.hero-heart::before{left:13%;transform:rotate(-43deg);transform-origin:100% 100%}
+.hero-heart::after{right:13%;transform:rotate(43deg);transform-origin:0 100%}
+.f-heart{position:absolute;color:#ec718d;text-shadow:0 0 15px rgba(252,95,139,.55);font-size:34px;z-index:3;opacity:.9}
+.f1{right:10%;top:28px}.f2{right:3%;top:108px;font-size:27px}.f3{right:87%;top:60px;font-size:27px}.f4{right:78%;top:150px;font-size:19px}.f5{right:18%;top:185px;font-size:18px}
+.screen-desktop{position:absolute;right:98px;bottom:6px;width:302px;height:182px;border-radius:8px 8px 3px 3px;z-index:4;background:linear-gradient(180deg,rgba(19,7,8,.1),rgba(18,4,8,.52)),url("images/hero-screen.webp") center/cover;border:5px solid #191517;box-shadow:0 24px 33px rgba(0,0,0,.50)}
+.screen-desktop::after{content:"";position:absolute;left:41%;bottom:-11px;width:18%;height:8px;background:#262124;border-radius:0 0 50% 50%}
+.screen-phone{position:absolute;right:36px;bottom:0;width:88px;height:184px;border-radius:16px;z-index:5;border:5px solid #1a1718;background:linear-gradient(180deg,rgba(21,5,7,.08),rgba(19,4,7,.30)),url("images/hero-phone.webp") center/cover;box-shadow:0 18px 28px rgba(0,0,0,.45)}
+.hero-line{height:1px;background:linear-gradient(90deg,transparent,rgba(234,97,128,.43),transparent)}
+.category-surface{padding:15px 17px 10px}
+.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:15px}
+.category-card{height:148px;position:relative;border-radius:9px;overflow:hidden;border:1px solid rgba(244,170,184,.20);isolation:isolate}
+.category-card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,3,4,.08) 0%,rgba(5,2,3,.18) 33%,rgba(5,2,3,.90) 100%);z-index:1}
+.category-card::after{content:"";position:absolute;inset:0;background:var(--image) 50%/cover;z-index:0;transition:transform .38s ease}
+.category-card:hover::after{transform:scale(1.06)}
+.cat-copy{position:absolute;left:13px;right:13px;bottom:10px;z-index:2}
+.cat-top{display:flex;align-items:center;gap:9px}
+.cat-icon{width:39px;height:39px;border:1px solid rgba(242,144,163,.76);border-radius:50%;display:grid;place-items:center;font-size:20px;color:#f693aa;flex:0 0 auto}
+.cat-title{font-size:12px;font-weight:700}
+.cat-text{display:block;margin:2px 0 7px;padding-left:48px;color:#f0dfe2;font-size:9px;line-height:1.18}
+.cat-link{display:inline-flex;margin-left:48px;padding:3px 12px;border:1px solid rgba(241,143,163,.64);border-radius:4px;font-size:9px;color:#fff}
+.category-all{display:flex;justify-content:center;padding:9px 0 0}.category-all a{padding:5px 20px;border:1px solid rgba(236,119,147,.60);border-radius:4px;font-size:10px}
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:13px;padding:13px 17px}
+.benefit{display:flex;align-items:center;gap:12px;padding:2px 15px;border-right:1px solid rgba(245,183,192,.18)}
+.benefit:last-child{border-right:0}.benefit-icon{color:#f57f99;font-size:28px;line-height:1}.benefit h3{margin:0 0 2px;color:#f58ba2;font-size:10px;text-transform:uppercase}.benefit p{margin:0;color:#e5d6d8;font-size:9px;line-height:1.35}
+.pricing-header{padding-top:18px}.pricing-header::before{content:"♡";display:block;height:10px;color:#ee809b;font-size:18px;line-height:6px;text-align:center}
+.prices{display:grid;grid-template-columns:repeat(3,1fr) .92fr;gap:11px;margin-top:11px}
+.price-card{position:relative;padding:19px 17px 15px;border:1px solid rgba(235,124,149,.52);border-radius:8px;background:linear-gradient(160deg,rgba(20,12,14,.76),rgba(7,4,5,.92))}
+.price-card--popular{border-color:#e4758f;box-shadow:0 0 0 1px rgba(221,98,127,.10)}
+.popular{position:absolute;top:-11px;left:22px;padding:3px 35px;background:linear-gradient(90deg,#bf4a64,#e67c96);font-size:10px;font-weight:700}.popular::before,.popular::after{content:"";position:absolute;top:100%;border-top:5px solid #853145}.popular::before{left:0;border-left:6px solid transparent}.popular::after{right:0;border-right:6px solid transparent}
+.price-name{margin:0;text-align:center;font:500 18px/1 "Cormorant Garamond",Georgia,serif}.price-name span{color:#ee7f9a;font-size:15px}.price{margin:1px 0 7px;text-align:center;font:500 47px/1 "Cormorant Garamond",Georgia,serif}.price small{font:400 10px "DM Sans",sans-serif;color:#e8dce0}
+.price-card ul{margin:0 0 13px;padding:0;list-style:none;color:#eee2e4;font-size:10px;line-height:1.65}.price-card li::before{content:"✓";color:#ef7793;margin-right:6px;font-weight:700}.price-card .button{width:100%;min-height:34px;padding:8px 10px;font-size:10px}
+.gift-panel{position:relative;overflow:hidden;min-height:235px;border:1px solid rgba(241,161,177,.18);border-radius:8px;background:linear-gradient(180deg,rgba(7,4,5,.03),rgba(7,4,5,.84)),url("images/gift-box.webp") 48%/cover}.gift-panel p{position:absolute;inset:auto 22px 16px;margin:0;text-align:center;font:500 21px/1.07 "Cormorant Garamond",Georgia,serif}
+.how{margin-top:13px;padding:14px 16px}.how-title{margin:0 0 10px;text-align:center;font:500 19px/1 "Cormorant Garamond",Georgia,serif}.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}.how-step{display:flex;align-items:center;gap:11px;padding:0 14px;border-right:1px solid rgba(243,177,189,.18)}.how-step:last-child{border-right:0}.how-icon{width:55px;height:55px;border:1px solid #ef7894;border-radius:50%;display:grid;place-items:center;color:#ef7894;font-size:22px;flex:0 0 auto}.how-step h3{margin:0 0 2px;font-size:10px;text-transform:uppercase}.how-step p{margin:0;color:#eee0e2;font-size:9px;line-height:1.3}
+.contact-block{padding:20px 0 32px}.contact-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:38px;padding:33px 35px;background:linear-gradient(135deg,rgba(89,28,42,.66),rgba(15,8,10,.96) 58%);border-radius:15px;border:1px solid rgba(244,150,169,.26)}
+.contact-copy h2{margin:0 0 11px;font:500 38px/1 "Cormorant Garamond",Georgia,serif}.contact-copy h2 span{display:block;color:var(--rose-soft);font:400 65px/.72 "Allura",cursive}.contact-copy p{max-width:400px;color:#e5d5d8;font-size:13px}.contact-points{display:grid;gap:9px;margin-top:20px;color:#f4e6e8;font-size:11px}.contact-points span{color:var(--rose-soft);margin-right:7px}
+@media(max-width:950px){.hero-grid{grid-template-columns:1fr;min-height:0}.hero-copy{padding:48px 0 14px}.hero-visual{height:430px;max-width:720px;width:100%;margin:0 auto}.category-grid{grid-template-columns:repeat(2,1fr)}.prices{grid-template-columns:repeat(2,1fr)}.gift-panel{min-height:245px}.benefits{grid-template-columns:repeat(2,1fr);row-gap:14px}.benefit:nth-child(2){border-right:0}.how-grid{grid-template-columns:repeat(2,1fr);row-gap:16px}.how-step:nth-child(2){border-right:0}.contact-wrap{grid-template-columns:1fr}}
+@media(max-width:560px){.hero{padding-top:0}.hero-copy{padding-top:32px}.hero-kicker{font-size:26px}.hero-title{font-size:35px}.hero-script{font-size:66px}.hero-lead{font-size:13px}.hero-visual{height:320px}.hero-photo{height:292px;width:100%;right:0}.hero-heart{top:-9px;width:96%;height:280px}.hero-heart::before,.hero-heart::after{border-width:3px;top:48px}.screen-desktop{width:208px;height:126px;right:37px}.screen-phone{width:62px;height:130px;right:4px}.f-heart{font-size:21px}.f1{right:7%;top:16px}.f2{right:1%;top:68px}.f3{right:88%;top:38px}.f4{right:79%;top:106px}.f5{right:18%;top:118px}.category-surface{padding:14px 10px 9px}.category-grid{grid-template-columns:1fr 1fr;gap:8px}.category-card{height:160px}.benefits{grid-template-columns:1fr;padding:13px}.benefit,.benefit:nth-child(2){padding:7px 0;border-right:0;border-bottom:1px solid rgba(243,177,189,.14)}.benefit:last-child{border-bottom:0}.prices{grid-template-columns:1fr}.price-card{padding:24px 18px 17px}.gift-panel{min-height:230px}.how-grid{grid-template-columns:1fr}.how-step,.how-step:nth-child(2){padding:10px 0;border-right:0;border-bottom:1px solid rgba(243,177,189,.14)}.how-step:last-child{border-bottom:0}.contact-wrap{padding:25px 17px}.contact-copy h2{font-size:32px}.contact-form{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="wordmark" href="index.html" aria-label="Accueil MakeYourStory">
+      <span class="mark" aria-hidden="true">M</span>
+      <span><span class="wordmark-title">MAKE YOUR STORY</span><span class="wordmark-sub">BY BASALTE-WEB</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="index.html" aria-current="page">Accueil</a><a href="categories.html">Catégories</a><a href="exemples.html">Exemples</a><a href="tarifs.html">Tarifs</a><a href="comment-ca-marche.html">Comment ça marche</a><a href="avis.html">Avis</a><a href="a-propos.html">À propos</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
+    </nav>
+    <a class="nav-cta" href="commander.html">Commander mon site <span aria-hidden="true">♡</span></a>
+    <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-menu-toggle>☰</button>
+  </div>
+  <div class="wrap mobile-menu" data-mobile-menu>
+    <a href="index.html" aria-current="page">Accueil</a><a href="categories.html">Catégories</a><a href="exemples.html">Exemples</a><a href="tarifs.html">Tarifs</a><a href="comment-ca-marche.html">Comment ça marche</a><a href="avis.html">Avis</a><a href="a-propos.html">À propos</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
+    <a href="commander.html">Commander mon site</a>
+  </div>
+</header>
+<main id="contenu">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="hero-kicker">OFFREZ PLUS QU’UN CADEAU.</p>
+        <h1 class="hero-title">OFFREZ UNE HISTOIRE</h1>
+        <p class="hero-script">qui restera. ♡</p>
+        <p class="hero-lead">Un site souvenir personnalisé qui raconte <b>votre histoire</b> avec vos photos, vos vidéos, votre musique et vos plus beaux moments.</p>
+        <div class="hero-actions">
+          <a class="button button--pink" href="#categories">Découvrir les catégories <span aria-hidden="true">›</span></a>
+          <a class="button button--ghost" href="stories/demo/index.html">Voir un exemple <span aria-hidden="true">▷</span></a>
+        </div>
+        <div class="hero-note"><span class="hero-stars">★★★★★</span><span>Chaque histoire mérite mieux qu’un album oublié.</span></div>
+      </div>
+      <div class="hero-visual" aria-label="Aperçu d’un site souvenir sur ordinateur et téléphone">
+        <div class="hero-heart" aria-hidden="true"></div>
+        <div class="hero-photo" role="img" aria-label="Couple amoureux"></div>
+        <span class="f-heart f1">♥</span><span class="f-heart f2">♥</span><span class="f-heart f3">♥</span><span class="f-heart f4">♥</span><span class="f-heart f5">♥</span>
+        <div class="screen-desktop" role="img" aria-label="Aperçu sur ordinateur"></div>
+        <div class="screen-phone" role="img" aria-label="Aperçu sur téléphone"></div>
+      </div>
+    </div>
+    <div class="hero-line"></div>
+  </section>
+
+  <section class="section" id="categories">
+    <div class="wrap surface category-surface">
+      <h2 class="section-title">TROUVEZ LE SITE PARFAIT POUR CHAQUE OCCASION</h2>
+      <p class="section-sub">Chaque histoire est unique. Chaque site aussi.</p>
+      <div class="category-grid">
+        <a class="category-card" href="categories/amour-couple.html" style="--image:url('images/cat-amour-couple.webp')"><span class="cat-copy"><span class="cat-top"><span class="cat-icon">♡</span><span class="cat-title">AMOUR &amp; COUPLE</span></span><span class="cat-text">Racontez votre histoire à deux.</span><span class="cat-link">Découvrir</span></span></a>
+        <a class="category-card" href="categories/mariage.html" style="--image:url('images/cat-mariage.webp')"><span class="cat-copy"><span class="cat-top"><span class="cat-icon">∞</span><span class="cat-title">MARIAGE</span></span><span class="cat-text">Partagez la magie de votre mariage.</span><span class="cat-link">Découvrir</span></span></a>
+        <a class="category-card" href="categories/naissance-bebe.html" style="--image:url('images/cat-naissance-bebe.webp')"><span class="cat-copy"><span class="cat-top"><span class="cat-icon">◌</span><span class="cat-title">NAISSANCE &amp; BÉBÉ</span></span><span class="cat-text">Immortalisez les premiers instants.</span><span class="cat-link">Découvrir</span></span></a>
+        <a class="category-card" href="categories/famille.html" style="--image:url('images/cat-famille.webp')"><span class="cat-copy"><span class="cat-top"><span class="cat-icon">♧</span><span class="cat-title">FAMILLE</span></span><span class="cat-text">Réunissez et partagez vos souvenirs.</span><span class="cat-link">Découvrir</span></span></a>
+        <a class="category-card" href="categories/anniversaire.html" style="--image:url('images/cat-anniversaire.webp')"><span class="cat-copy"><span class="cat-top"><span class="cat-icon">♕</span><span class="cat-title">ANNIVERSAIRE</span></span><span class="cat-text">Un anniversaire inoubliable en ligne.</span><span class="cat-link">Découvrir</span></span></a>
+        <a class="category-card" href="categories/hommage.html" style="--image:url('images/cat-hommage.webp')"><span class="cat-copy"><span class="cat-top"><span class="cat-icon">♧</span><span class="cat-title">HOMMAGE</span></span><span class="cat-text">Rendez hommage à un être cher.</span><span class="cat-link">Découvrir</span></span></a>
+        <a class="category-card" href="categories/animaux.html" style="--image:url('images/cat-animaux.webp')"><span class="cat-copy"><span class="cat-top"><span class="cat-icon">♧</span><span class="cat-title">ANIMAUX</span></span><span class="cat-text">Célébrez la vie de votre compagnon.</span><span class="cat-link">Découvrir</span></span></a>
+        <a class="category-card" href="categories/autres-evenements.html" style="--image:url('images/cat-autres-evenements.webp')"><span class="cat-copy"><span class="cat-top"><span class="cat-icon">☆</span><span class="cat-title">AUTRES ÉVÉNEMENTS</span></span><span class="cat-text">Départ, EVJF, fêtes, retraite et plus encore.</span><span class="cat-link">Découvrir</span></span></a>
+      </div>
+      <div class="category-all"><a href="categories.html">Voir toutes les catégories</a></div>
+    </div>
+
+    <div class="wrap surface benefits">
+      <div class="benefit"><span class="benefit-icon">♙</span><div><h3>100% privé</h3><p>Votre histoire reste accessible avec le lien que vous choisissez de partager.</p></div></div>
+      <div class="benefit"><span class="benefit-icon">♡</span><div><h3>Personnalisé</h3><p>Photos, textes, musique, couleurs : votre histoire ne ressemble à aucune autre.</p></div></div>
+      <div class="benefit"><span class="benefit-icon">▯</span><div><h3>Compatible partout</h3><p>Mobile, tablette et ordinateur : l’expérience reste belle à chaque écran.</p></div></div>
+      <div class="benefit"><span class="benefit-icon">ϟ</span><div><h3>Livraison rapide</h3><p>Votre site est préparé dès que tous vos souvenirs sont réunis.</p></div></div>
+    </div>
+  </section>
+
+  <section class="section" id="tarifs">
+    <div class="wrap">
+      <div class="pricing-header">
+        <h2 class="section-title">NOS OFFRES SIMPLES ET TRANSPARENTES</h2>
+        <p class="section-sub">Des formules adaptées à chaque histoire et à chaque budget.</p>
+      </div>
+      <div class="prices">
+        <article class="price-card">
+          <h3 class="price-name">ESSENTIEL <span>♡</span></h3>
+          <div class="price">49<small>€ TTC</small></div>
+          <ul><li>Jusqu’à 20 photos</li><li>1 musique de fond</li><li>Une page personnalisée</li><li>Design adapté à l’occasion</li><li>Lien privé</li></ul>
+          <a class="button button--ghost" href="commander.html?offre=essentiel">Choisir cette offre</a>
+        </article>
+        <article class="price-card price-card--popular">
+          <span class="popular">POPULAIRE</span>
+          <h3 class="price-name">PREMIUM <span>♥ ♥</span></h3>
+          <div class="price">79<small>€ TTC</small></div>
+          <ul><li>Jusqu’à 100 photos</li><li>Musiques et vidéos</li><li>Galerie ou diaporama</li><li>Texte personnalisé</li><li>Lien privé + QR Code</li></ul>
+          <a class="button button--pink" href="commander.html?offre=premium">Choisir cette offre</a>
+        </article>
+        <article class="price-card">
+          <h3 class="price-name">PRESTIGE <span>♥ ♡</span></h3>
+          <div class="price">99<small>€ TTC</small></div>
+          <ul><li>Photos plus nombreuses</li><li>Vidéos et musiques</li><li>Page d’entrée avec code</li><li>Ambiance visuelle approfondie</li><li>QR Code à offrir</li></ul>
+          <a class="button button--ghost" href="commander.html?offre=prestige">Choisir cette offre</a>
+        </article>
+        <aside class="gift-panel"><p>OFFREZ<br>UN CADEAU<br>QUI TOUCHE<br>EN PLEIN CŒUR<br><span style="color:#ed7994">♡</span></p></aside>
+      </div>
+      <div class="surface how">
+        <h2 class="how-title">COMMENT ÇA MARCHE ?</h2>
+        <div class="how-grid">
+          <div class="how-step"><span class="how-icon">▤</span><div><h3>1. Commandez</h3><p>Choisissez votre formule et décrivez votre idée.</p></div></div>
+          <div class="how-step"><span class="how-icon">↥</span><div><h3>2. Envoyez</h3><p>Transmettez vos photos, textes et musique via un lien prévu pour vous.</p></div></div>
+          <div class="how-step"><span class="how-icon">✎</span><div><h3>3. Nous créons</h3><p>Votre histoire prend forme avec une vraie direction artistique.</p></div></div>
+          <div class="how-step"><span class="how-icon">✓</span><div><h3>4. Offrez</h3><p>Recevez le lien privé et le QR Code pour faire la surprise.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-block" id="contact">
+    <div class="wrap contact-wrap">
+      <div class="contact-copy">
+        <h2>Une surprise en tête ?<span>Parlons-en.</span></h2>
+        <p>Décrivez-nous votre idée, même en quelques lignes. On vous aide à imaginer une surprise qui ne ressemble à personne d’autre.</p>
+        <div class="contact-points"><div><span>✦</span>Parlez d’une occasion, d’une personne, d’une date ou d’un budget.</div><div><span>✦</span>Vous n’avez pas besoin de connaître la technique : elle doit surtout être belle.</div><div><span>✦</span>Besoin d’échanger ? <a href="tel:+33670396322">06 70 39 63 22</a></div></div>
+      </div>
+      <form class="contact-form form-grid" action="https://formsubmit.co/basalteweb@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Nouveau projet MakeYourStory">
+        <input type="hidden" name="_next" value="https://makeyourstory.fr/merci.html">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none">
+        <div class="field"><label for="prenom">Votre prénom *</label><input id="prenom" name="Prénom" required autocomplete="given-name" placeholder="Ex. Camille"></div>
+        <div class="field"><label for="email">Votre e-mail *</label><input id="email" type="email" name="Email" required autocomplete="email" placeholder="vous@email.fr"></div>
+        <div class="field"><label for="occasion">Pour quelle occasion ? *</label><select id="occasion" name="Occasion" required><option value="">Choisir une occasion</option><option>Amour & couple</option><option>Mariage</option><option>Naissance & bébé</option><option>Famille</option><option>Anniversaire</option><option>Hommage</option><option>Animal</option><option>Autre événement</option></select></div>
+        <div class="field"><label for="budget">Votre budget</label><select id="budget" name="Budget"><option value="">À définir</option><option>49 € — Essentiel</option><option>79 € — Premium</option><option>99 € — Prestige</option><option>Je souhaite en discuter</option></select></div>
+        <div class="field field--full"><label for="projet">Décrivez votre projet *</label><textarea id="projet" name="Projet" required placeholder="Racontez l’occasion, le type de photos que vous avez, le message que vous souhaitez faire passer et la date à laquelle vous aimeriez offrir le site…"></textarea></div>
+        <div class="field field--full"><button class="button button--pink" type="submit">Envoyer ma demande <span aria-hidden="true">♡</span></button><p class="form-note">Vos informations sont utilisées uniquement pour traiter votre demande. <a href="confidentialite.html">Voir la politique de confidentialité.</a></p></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-promise">
+        <span class="footer-heart" aria-hidden="true">♡</span>
+        <div><strong>DES SOUVENIRS QUI RESTENT.</strong><p>DES ÉMOTIONS QUI DURERONT.</p></div>
+      </div>
+      <div>
+        <strong>UNE QUESTION ?</strong>
+        <p><a href="mailto:basalteweb@gmail.com">basalteweb@gmail.com</a></p>
+        <p><a href="tel:+33670396322">06 70 39 63 22</a></p>
+      </div>
+      <div>
+        <strong>SUIVEZ-NOUS</strong>
+        <p><a href="#" aria-label="Instagram MakeYourStory">Instagram</a> · <a href="#" aria-label="TikTok MakeYourStory">TikTok</a></p>
+      </div>
+      <div class="footer-brand">
+        <small>UNE CRÉATION</small>
+        <span>BASALTE-WEB</span>
+        <small>MAKE YOUR STORY</small>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span>© 2026 MakeYourStory.fr — Marque exploitée par BASALTE-WEB.</span>
+      <span><a href="access.html">Accéder à mon histoire</a> · <a href="cgv.html">CGV</a> · <a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="politique-cookies.html">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+<script src="assets/site.js" defer></script>
+</body></html>
