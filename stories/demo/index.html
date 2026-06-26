@@ -5,11 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#070506">
-  <meta name="robots" content="noindex,follow">  <title>Camille & Thomas — Une histoire | MakeYourStory.fr</title>
+  <meta name="robots" content="noindex,follow">  <title>Arnaud & Angélique — Notre histoire | MakeYourStory.fr</title>
   <meta name="description" content="Démo immersive d’une histoire personnalisée créée avec MakeYourStory.">
   <link rel="canonical" href="https://makeyourstory.fr/stories/demo/index.html">  <meta property="og:type" content="website">
   <meta property="og:site_name" content="MakeYourStory">
-  <meta property="og:title" content="Camille & Thomas — Une histoire à découvrir">
+  <meta property="og:title" content="Arnaud & Angélique — Notre histoire">
   <meta property="og:description" content="Un exemple immersif de site souvenir personnalisé.">
   <meta property="og:url" content="https://makeyourstory.fr/stories/demo/index.html">
   <meta property="og:image" content="https://makeyourstory.fr/images/og-makeyourstory.webp">  <link rel="icon" href="../../images/favicon.webp" type="image/webp">
@@ -1256,11 +1256,11 @@
   </style></head><body>
   <div class="scroll-progress" aria-hidden="true"><span data-progress></span></div>  <section class="entry" data-entry>
     <div class="entry-inner">
-      <p class="entry-kicker">Pour Camille · De la part de Thomas</p>
-      <h1 class="entry-title">Je t’ai préparé<span>quelque chose.</span></h1>
-      <p class="entry-copy">Pas un cadeau qu’on pose sur une étagère. Quelques pages qui racontent ce qu’on a vécu, ce que je garde, et tout ce que je veux encore vivre avec toi.</p>
+      <p class="entry-kicker">Pour Angélique · De la part d’Arnaud</p>
+      <h1 class="entry-title">Pour nous,<span>j’ai gardé ces moments.</span></h1>
+      <p class="entry-copy">Pas un cadeau qu’on pose sur une étagère. Quelques pages qui racontent ce qu’on a vécu, ce que je garde, et tout ce que je veux encore vivre avec toi, Angélique.</p>
       <button class="button-main" type="button" data-enter>Tu es prête ? <span aria-hidden="true">♡</span></button>
-      <p class="entry-note">Prends ton temps. Cette histoire est pour toi.</p>
+      <p class="entry-note">Prends ton temps. Cette histoire est pour toi, Angélique.</p>
     </div>
   </section>  <header class="story-header" data-header>
     <nav class="story-nav">
@@ -1271,13 +1271,13 @@
           <span class="brand-sub">HISTOIRE DÉMONSTRATION</span>
         </span>
       </a>  <div class="header-actions">
-    <span class="header-label">Camille & Thomas</span>
+    <span class="header-label">Arnaud & Angélique</span>
     <button class="sound-button" type="button" aria-label="Activer ou couper la musique" aria-pressed="false" data-sound>♪</button>
     <a class="back-link" href="../../index.html">Retour au site</a>
   </div>
 </nav>
 
-  </header>  <audio id="story-audio" preload="none" loop>
+  </header>  <audio id="story-audio" preload="auto" loop>
     <source src="../../audio/demo-love.mp3" type="audio/mpeg">
   </audio>  <main>
     <section class="hero">
@@ -1437,12 +1437,12 @@
 <section class="letter-section">
   <div class="shell">
     <article class="letter reveal">
-      <div class="letter-photo" role="img" aria-label="Souvenir tendre de Camille et Thomas"></div>
+      <div class="letter-photo" role="img" aria-label="Souvenir tendre d’Arnaud et Angélique"></div>
 
       <div class="letter-copy">
         <small>La partie que je ne savais pas dire</small>
 
-        <h2 class="letter-title">Pour toi,<span>encore et toujours.</span></h2>
+        <h2 class="letter-title">Pour Angélique,<span>encore et toujours.</span></h2>
 
         <p>Je ne savais pas comment t’offrir tout ce que tu représentes. Alors j’ai rassemblé quelques morceaux de nous : les photos, les détails, les moments qu’on aurait pu laisser filer.</p>
 
@@ -1450,7 +1450,7 @@
 
         <p>Je veux que tu gardes cette page comme on garde une main, une odeur, une chanson : sans avoir besoin de l’expliquer.</p>
 
-        <p class="signature">Thomas ♡</p>
+        <p class="signature">Arnaud ♡</p>
       </div>
     </article>
   </div>
@@ -1518,9 +1518,33 @@
 
       document.body.style.overflow = "hidden";
 
+      const startMusic = async () => {
+        try {
+          audio.volume = 0;
+          await audio.play();
+
+          soundButton.classList.add("is-on");
+          soundButton.setAttribute("aria-pressed", "true");
+          soundButton.textContent = "❚❚";
+
+          let volume = 0;
+          const fadeIn = window.setInterval(() => {
+            volume += 0.04;
+            audio.volume = Math.min(volume, 0.55);
+
+            if (volume >= 0.55) {
+              window.clearInterval(fadeIn);
+            }
+          }, 110);
+        } catch (error) {
+          soundButton.textContent = "♪";
+        }
+      };
+
       enterButton.addEventListener("click", () => {
         entry.classList.add("is-open");
         document.body.style.overflow = "";
+        startMusic();
         setTimeout(() => entry.remove(), 900);
       });
 
