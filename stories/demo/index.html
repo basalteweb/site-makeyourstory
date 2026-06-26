@@ -1,737 +1,980 @@
 <!doctype html>
+
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#070506">
-  <meta name="robots" content="noindex,follow">
-  <title>Camille & Thomas — Démo | MakeYourStory.fr</title>
-  <meta name="description" content="Démo immersive d’une histoire personnalisée MakeYourStory.">
-  <link rel="canonical" href="https://makeyourstory.fr/stories/demo/index.html">
-
-  <meta property="og:type" content="website">
+  <meta name="robots" content="noindex,follow">  <title>Camille & Thomas — Une histoire | MakeYourStory.fr</title>
+  <meta name="description" content="Démo immersive d’une histoire personnalisée créée avec MakeYourStory.">
+  <link rel="canonical" href="https://makeyourstory.fr/stories/demo/index.html">  <meta property="og:type" content="website">
   <meta property="og:site_name" content="MakeYourStory">
   <meta property="og:title" content="Camille & Thomas — Une histoire à découvrir">
-  <meta property="og:description" content="Une démo immersive de site souvenir personnalisé.">
+  <meta property="og:description" content="Un exemple immersif de site souvenir personnalisé.">
   <meta property="og:url" content="https://makeyourstory.fr/stories/demo/index.html">
-  <meta property="og:image" content="https://makeyourstory.fr/images/og-makeyourstory.webp">
-
-  <link rel="icon" href="../../images/favicon.webp" type="image/webp">
-  <link rel="apple-touch-icon" href="../../images/apple-touch-icon.webp">
-  <link rel="stylesheet" href="../../assets/site.css">
-  <script src="../../assets/analytics.js" defer></script>
-
-  <style>
+  <meta property="og:image" content="https://makeyourstory.fr/images/og-makeyourstory.webp">  <link rel="icon" href="../../images/favicon.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="../../images/apple-touch-icon.webp">  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">  <style>
     :root{
-      --story-black:#070506;
-      --story-wine:#3a101d;
-      --story-rose:#f182a1;
-      --story-rose-soft:#ffc6d1;
-      --story-paper:#fff9f7;
-      --story-muted:#cdbbc0;
+      --black:#070506;
+      --black-soft:#12090d;
+      --rose:#ef7f9d;
+      --rose-soft:#ffcbd5;
+      --wine:#4a1325;
+      --paper:#fff8f5;
+      --paper-ink:#351720;
+      --muted:#cbb8bd;
+      --line:rgba(255,205,216,.16);
+      --max:1240px;
     }
 
-    body.demo-page{
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-width:320px;
       overflow-x:hidden;
       background:
-        radial-gradient(850px 600px at 85% 0%, rgba(166,38,72,.19), transparent 65%),
-        radial-gradient(850px 700px at 0% 60%, rgba(80,14,34,.15), transparent 70%),
-        var(--story-black);
-      color:var(--story-paper);
+        radial-gradient(1000px 700px at 100% 0%,rgba(170,39,75,.18),transparent 65%),
+        radial-gradient(900px 800px at 0% 44%,rgba(81,13,34,.17),transparent 65%),
+        var(--black);
+      color:var(--paper);
+      font-family:"DM Sans",Arial,sans-serif;
+      line-height:1.45;
     }
 
-    .demo-page .site-header{
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    ::selection{background:rgba(239,127,157,.48);color:#fff}
+
+    .scroll-progress{
       position:fixed;
       top:0;
       left:0;
-      width:100%;
-      background:linear-gradient(180deg,rgba(6,4,5,.86),rgba(6,4,5,.22));
-      border-bottom:0;
-      backdrop-filter:none;
-      z-index:80;
-      transition:transform .35s ease, background .35s ease;
-    }
-
-    .demo-page .site-header.is-scrolled{
-      background:rgba(7,5,6,.92);
-      backdrop-filter:blur(16px);
-      border-bottom:1px solid rgba(255,255,255,.07);
-    }
-
-    .story-nav{
-      width:min(1240px,calc(100% - 42px));
-      min-height:74px;
-      margin:auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-    }
-
-    .story-nav-brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      color:#fff;
-      min-width:0;
-    }
-
-    .story-nav-brand .brand-mark{
-      position:relative;
-      width:38px;
-      height:38px;
-      display:grid;
-      place-items:center;
-      font:600 31px/1 "Cormorant Garamond",Georgia,serif;
-    }
-
-    .story-nav-brand .brand-mark::after{
-      content:"♡";
-      position:absolute;
-      right:-5px;
-      bottom:-6px;
-      color:var(--story-rose);
-      font:400 18px/1 Arial,sans-serif;
-    }
-
-    .story-nav-brand .brand-name{
-      display:block;
-      letter-spacing:.25em;
-      font:500 16px/1 "Cormorant Garamond",Georgia,serif;
-    }
-
-    .story-nav-brand .brand-label{
-      display:block;
-      margin-top:4px;
-      color:var(--story-rose-soft);
-      font-size:7px;
-      font-weight:700;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-    }
-
-    .story-nav-actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-
-    .story-demo-badge{
-      border:1px solid rgba(255,199,210,.31);
-      border-radius:999px;
-      padding:8px 12px;
-      color:#f8dfe5;
-      font-size:10px;
-      letter-spacing:.11em;
-      text-transform:uppercase;
-    }
-
-    .story-return{
-      border:1px solid rgba(245,126,154,.58);
-      border-radius:999px;
-      padding:9px 14px;
-      font-size:11px;
-      color:#fff;
-      transition:.2s ease;
-    }
-
-    .story-return:hover{background:rgba(241,130,157,.14)}
-
-    .music-toggle{
-      width:39px;
-      height:39px;
-      display:grid;
-      place-items:center;
-      border:1px solid rgba(245,126,154,.54);
-      border-radius:50%;
-      background:rgba(8,5,6,.42);
-      color:var(--story-rose-soft);
-      cursor:pointer;
-      transition:.2s ease;
-    }
-
-    .music-toggle:hover,.music-toggle.is-playing{
-      background:linear-gradient(135deg,#ef829c,#bd405f);
-      color:#fff;
-      box-shadow:0 0 24px rgba(235,113,146,.35);
-    }
-
-    .progress-line{
-      position:fixed;
-      left:0;
-      top:0;
-      z-index:100;
+      z-index:999;
       width:100%;
       height:2px;
+      background:rgba(255,255,255,.07);
       pointer-events:none;
-      background:rgba(255,255,255,.06);
     }
 
-    .progress-line span{
+    .scroll-progress span{
       display:block;
       width:0;
       height:100%;
-      background:linear-gradient(90deg,#ea6988,#ffd1db);
-      box-shadow:0 0 14px rgba(255,128,158,.9);
+      background:linear-gradient(90deg,var(--rose),var(--rose-soft));
+      box-shadow:0 0 16px rgba(255,133,165,.92);
     }
 
-    /* Entry screen */
-    .entry-gate{
+    /* ÉCRAN D’ENTRÉE */
+
+    .entry{
       position:fixed;
       inset:0;
-      z-index:200;
+      z-index:900;
       display:grid;
       place-items:center;
       overflow:hidden;
-      background:#070506;
-      transition:opacity .85s ease,visibility .85s ease;
+      background:var(--black);
+      transition:opacity .9s ease,visibility .9s ease;
     }
 
-    .entry-gate.is-open{
+    .entry.is-open{
       opacity:0;
       visibility:hidden;
       pointer-events:none;
     }
 
-    .entry-gate::before{
+    .entry::before{
       content:"";
       position:absolute;
       inset:0;
       background:
-        linear-gradient(180deg,rgba(5,3,4,.32),rgba(5,3,4,.76)),
-        url("../../images/demo-intro.webp") center/cover;
-      transform:scale(1.04);
-      animation:gateZoom 15s ease-in-out infinite alternate;
+        linear-gradient(180deg,rgba(7,4,5,.25),rgba(7,4,5,.82)),
+        url("../../images/demo-gate.webp") center/cover;
+      transform:scale(1.06);
+      animation:slowZoom 16s ease-in-out infinite alternate;
     }
 
-    .entry-gate::after{
+    .entry::after{
       content:"";
       position:absolute;
       inset:0;
       background:
-        radial-gradient(circle at 50% 44%, transparent 0 15%, rgba(6,4,5,.16) 46%, rgba(6,4,5,.78) 100%),
-        linear-gradient(90deg,rgba(6,4,5,.55),transparent 42%,rgba(6,4,5,.38));
+        radial-gradient(circle at 50% 41%,transparent 0 14%,rgba(7,4,5,.14) 45%,rgba(7,4,5,.84) 100%),
+        linear-gradient(90deg,rgba(7,4,5,.52),transparent 44%,rgba(7,4,5,.42));
     }
 
-    @keyframes gateZoom{
-      from{transform:scale(1.04)}
-      to{transform:scale(1.13)}
+    @keyframes slowZoom{
+      from{transform:scale(1.06)}
+      to{transform:scale(1.16)}
     }
 
-    .gate-content{
+    .entry-inner{
       position:relative;
       z-index:1;
-      width:min(600px,calc(100% - 38px));
+      width:min(640px,calc(100% - 36px));
       text-align:center;
     }
 
-    .gate-kicker{
+    .entry-kicker,
+    .hero-kicker,
+    .final-kicker{
       margin:0;
-      color:#f6bdca;
+      color:var(--rose-soft);
       font-size:10px;
       font-weight:700;
-      letter-spacing:.24em;
+      letter-spacing:.25em;
       text-transform:uppercase;
     }
 
-    .gate-content h1{
+    .entry-title{
       margin:19px 0 0;
-      font:500 clamp(64px,12vw,130px)/.76 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:-.04em;
+      font:500 clamp(67px,12vw,140px)/.73 "Cormorant Garamond",Georgia,serif;
+      letter-spacing:-.05em;
     }
 
-    .gate-content h1 span{
+    .entry-title span,
+    .hero-title span,
+    .chapter-title span,
+    .letter-title span,
+    .film-title span,
+    .final-title span{
       display:block;
-      margin-top:4px;
-      color:var(--story-rose-soft);
-      font:400 .72em/.8 "Allura","Brush Script MT",cursive;
+      color:var(--rose-soft);
+      font:400 .68em/.72 "Allura","Brush Script MT",cursive;
       letter-spacing:0;
     }
 
-    .gate-content p{
-      max-width:390px;
-      margin:24px auto 27px;
-      color:#f2e3e7;
+    .entry-copy{
+      max-width:425px;
+      margin:26px auto 28px;
+      color:#f4e8eb;
       font-size:14px;
-      line-height:1.65;
+      line-height:1.68;
     }
 
-    .gate-button{
+    .button-main{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:10px;
-      min-height:52px;
+      min-height:53px;
+      padding:0 30px;
       border:1px solid transparent;
       border-radius:999px;
-      padding:0 28px;
-      background:linear-gradient(135deg,#ef8aa2,#b63a59);
+      background:linear-gradient(135deg,#f28da5,#b93b5b);
       color:#fff;
-      box-shadow:0 16px 34px rgba(201,65,97,.32);
+      box-shadow:0 20px 42px rgba(221,87,121,.37);
       font-size:12px;
       font-weight:700;
       cursor:pointer;
       transition:.2s ease;
     }
 
-    .gate-button:hover{transform:translateY(-2px);box-shadow:0 22px 42px rgba(232,99,133,.46)}
+    .button-main:hover{
+      transform:translateY(-2px);
+      box-shadow:0 25px 48px rgba(238,105,141,.52);
+    }
 
-    .gate-note{
+    .entry-note{
       margin:21px 0 0;
-      color:rgba(255,236,240,.66);
+      color:rgba(255,235,240,.64);
       font-size:9px;
-      letter-spacing:.12em;
+      letter-spacing:.13em;
       text-transform:uppercase;
     }
 
-    /* Hero */
-    .story-hero{
+    /* HEADER */
+
+    .story-header{
+      position:fixed;
+      top:0;
+      left:0;
+      z-index:100;
+      width:100%;
+      transition:.3s ease;
+    }
+
+    .story-header.is-solid{
+      border-bottom:1px solid rgba(255,255,255,.07);
+      background:rgba(7,5,6,.89);
+      backdrop-filter:blur(15px);
+    }
+
+    .story-nav{
+      width:min(var(--max),calc(100% - 42px));
+      min-height:76px;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+
+    .brand-mark{
+      width:39px;
+      height:39px;
+      position:relative;
+      display:grid;
+      place-items:center;
+      font:600 32px/1 "Cormorant Garamond",Georgia,serif;
+    }
+
+    .brand-mark::after{
+      content:"♡";
+      position:absolute;
+      right:-5px;
+      bottom:-6px;
+      color:var(--rose);
+      font:400 18px/1 Arial,sans-serif;
+    }
+
+    .brand-name{
+      display:block;
+      font:500 16px/1 "Cormorant Garamond",Georgia,serif;
+      letter-spacing:.23em;
+    }
+
+    .brand-sub{
+      display:block;
+      margin-top:4px;
+      color:var(--rose-soft);
+      font-size:7px;
+      font-weight:700;
+      letter-spacing:.23em;
+      text-transform:uppercase;
+    }
+
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .header-label{
+      color:rgba(255,234,239,.90);
+      font-size:10px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+
+    .sound-button{
+      width:39px;
+      height:39px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(252,174,194,.42);
+      border-radius:50%;
+      background:rgba(7,4,5,.2);
+      color:var(--rose-soft);
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .sound-button:hover,
+    .sound-button.is-on{
+      background:linear-gradient(135deg,#ef849f,#b83b5b);
+      color:#fff;
+      box-shadow:0 0 22px rgba(244,120,154,.38);
+    }
+
+    .back-link{
+      border:1px solid rgba(252,174,194,.40);
+      border-radius:999px;
+      padding:9px 14px;
+      color:#fff;
+      font-size:10px;
+      transition:.2s ease;
+    }
+
+    .back-link:hover{background:rgba(239,127,157,.14)}
+
+    /* HERO */
+
+    .hero{
       min-height:100svh;
       position:relative;
       display:grid;
       align-items:end;
       isolation:isolate;
       overflow:hidden;
-      padding:116px 0 56px;
+      padding:120px 0 58px;
     }
 
-    .story-hero::before{
+    .hero::before{
       content:"";
       position:absolute;
       inset:0;
       z-index:-2;
       background:
-        linear-gradient(180deg,rgba(7,4,5,.15) 0%,rgba(7,4,5,.10) 34%,rgba(7,4,5,.87) 100%),
-        linear-gradient(90deg,rgba(7,4,5,.70),transparent 50%,rgba(7,4,5,.28)),
+        linear-gradient(180deg,rgba(7,4,5,.09) 0%,rgba(7,4,5,.16) 35%,rgba(7,4,5,.92) 100%),
+        linear-gradient(90deg,rgba(7,4,5,.66),transparent 53%,rgba(7,4,5,.24)),
         url("../../images/demo-hero.webp") center/cover;
-      transform:scale(1.03);
-      animation:heroKenBurns 23s ease-in-out infinite alternate;
+      transform:scale(1.04);
+      animation:heroMove 23s ease-in-out infinite alternate;
     }
 
-    @keyframes heroKenBurns{
-      from{transform:scale(1.03) translate3d(0,0,0)}
-      to{transform:scale(1.12) translate3d(-1.3%,1%,0)}
+    @keyframes heroMove{
+      from{transform:scale(1.04) translate3d(0,0,0)}
+      to{transform:scale(1.13) translate3d(-1.2%,1%,0)}
     }
 
-    .story-hero::after{
+    .hero::after{
       content:"";
       position:absolute;
       inset:0;
       z-index:-1;
       background:
-        radial-gradient(ellipse at 50% 10%,rgba(245,132,160,.18),transparent 44%),
-        radial-gradient(circle at 76% 27%,rgba(241,126,159,.20),transparent 18%);
+        radial-gradient(ellipse at 58% 7%,rgba(255,145,175,.16),transparent 45%),
+        radial-gradient(circle at 80% 33%,rgba(245,120,153,.18),transparent 19%);
       mix-blend-mode:screen;
-      pointer-events:none;
     }
 
-    .hero-heart-ring{
+    .hero-heart{
       position:absolute;
-      right:7%;
-      top:17%;
-      width:min(38vw,510px);
-      aspect-ratio:1.08;
-      opacity:.72;
-      filter:drop-shadow(0 0 16px rgba(245,110,146,.5));
+      right:6%;
+      top:16%;
+      width:min(39vw,540px);
+      aspect-ratio:1.06;
+      filter:drop-shadow(0 0 17px rgba(245,110,146,.5));
+      opacity:.73;
       pointer-events:none;
     }
 
-    .hero-heart-ring::before,.hero-heart-ring::after{
+    .hero-heart::before,
+    .hero-heart::after{
       content:"";
       position:absolute;
       top:18%;
       width:49%;
       height:70%;
-      border:4px solid rgba(255,144,172,.84);
+      border:4px solid rgba(255,144,172,.86);
       border-bottom:0;
       border-radius:50% 50% 0 0;
     }
 
-    .hero-heart-ring::before{left:10%;transform:rotate(-43deg);transform-origin:100% 100%}
-    .hero-heart-ring::after{right:10%;transform:rotate(43deg);transform-origin:0 100%}
-
-    .hero-content{
-      width:min(1160px,calc(100% - 44px));
-      margin:auto;
-      position:relative;
-      z-index:1;
+    .hero-heart::before{
+      left:10%;
+      transform:rotate(-43deg);
+      transform-origin:100% 100%;
     }
 
-    .hero-overline{
-      margin:0 0 12px;
-      color:#ffc7d3;
-      font-size:10px;
-      font-weight:700;
-      letter-spacing:.25em;
-      text-transform:uppercase;
+    .hero-heart::after{
+      right:10%;
+      transform:rotate(43deg);
+      transform-origin:0 100%;
+    }
+
+    .hero-content,
+    .shell{
+      width:min(var(--max),calc(100% - 44px));
+      margin:auto;
     }
 
     .hero-title{
-      margin:0;
-      max-width:780px;
-      font:500 clamp(76px,11vw,148px)/.70 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:-.055em;
+      margin:13px 0 0;
+      max-width:790px;
+      font:500 clamp(79px,11.6vw,157px)/.69 "Cormorant Garamond",Georgia,serif;
+      letter-spacing:-.058em;
     }
 
-    .hero-title span{
-      display:block;
-      margin-top:12px;
-      color:#ffc5d1;
-      font:400 .68em/.72 "Allura","Brush Script MT",cursive;
-      letter-spacing:0;
-    }
+    .hero-title span{margin-top:15px}
 
     .hero-copy{
-      max-width:380px;
-      margin:28px 0 0;
-      color:#f4e5e8;
+      max-width:390px;
+      margin:30px 0 0;
+      color:#f3e5e8;
       font-size:14px;
-      line-height:1.62;
+      line-height:1.66;
     }
 
     .hero-meta{
       display:flex;
       align-items:center;
       flex-wrap:wrap;
-      gap:12px;
+      gap:17px;
       margin-top:29px;
-      color:#f6dee4;
-      font-size:10px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-    }
-
-    .hero-meta span{display:inline-flex;align-items:center;gap:9px}
-    .hero-meta span::before{content:"";width:24px;height:1px;background:#ee7895}
-
-    .scroll-prompt{
-      position:absolute;
-      right:0;
-      bottom:3px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      color:rgba(255,233,239,.84);
+      color:#f3dce2;
       font-size:10px;
       letter-spacing:.14em;
       text-transform:uppercase;
-      writing-mode:vertical-rl;
-      transform:rotate(180deg);
     }
 
-    .scroll-prompt::before{
-      content:"";
-      width:1px;
-      height:42px;
-      background:linear-gradient(#f38aa4,transparent);
-    }
-
-    /* Shared story blocks */
-    .story-shell{
-      width:min(1160px,calc(100% - 44px));
-      margin:auto;
-    }
-
-    .story-section{
-      padding:118px 0;
-      position:relative;
-    }
-
-    .split-intro{
-      display:grid;
-      grid-template-columns:.85fr 1.15fr;
-      gap:clamp(28px,6vw,88px);
+    .hero-meta span{
+      display:inline-flex;
       align-items:center;
+      gap:9px;
     }
 
-    .chapter-count{
+    .hero-meta span::before{
+      content:"";
+      width:24px;
+      height:1px;
+      background:var(--rose);
+    }
+
+    /* SECTIONS */
+
+    .story-section{padding:120px 0}
+
+    .chapter-index{
       display:flex;
       align-items:center;
-      gap:13px;
-      color:var(--story-rose-soft);
+      gap:12px;
+      color:var(--rose-soft);
       font-size:10px;
       font-weight:700;
-      letter-spacing:.2em;
+      letter-spacing:.20em;
       text-transform:uppercase;
     }
 
-    .chapter-count::before{
-      content:"01";
+    .chapter-index::before{
+      content:attr(data-number);
+      width:43px;
+      height:43px;
       display:grid;
       place-items:center;
-      width:42px;
-      height:42px;
-      border:1px solid rgba(245,132,160,.58);
+      border:1px solid rgba(246,141,165,.60);
       border-radius:50%;
-      font:500 18px/1 "Cormorant Garamond",Georgia,serif;
+      font:500 19px/1 "Cormorant Garamond",Georgia,serif;
       letter-spacing:0;
     }
 
     .chapter-title{
       margin:21px 0 0;
-      font:500 clamp(45px,6vw,78px)/.91 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:-.04em;
+      font:500 clamp(47px,6vw,79px)/.90 "Cormorant Garamond",Georgia,serif;
+      letter-spacing:-.044em;
     }
 
-    .chapter-title span{
-      display:block;
-      margin-top:6px;
-      color:var(--story-rose-soft);
-      font:400 .78em/.75 "Allura","Brush Script MT",cursive;
-      letter-spacing:0;
-    }
+    .chapter-title span{margin-top:7px}
 
-    .chapter-text{
-      max-width:470px;
+    .chapter-copy{
+      max-width:485px;
       margin:22px 0 0;
-      color:var(--story-muted);
+      color:var(--muted);
       font-size:14px;
-      line-height:1.75;
+      line-height:1.76;
     }
 
-    .date-stamp{
+    .date-line{
       display:inline-flex;
-      margin-top:25px;
       align-items:center;
       gap:11px;
-      color:#fff2f4;
+      margin-top:26px;
+      color:#fff0f3;
       font-size:10px;
       letter-spacing:.16em;
       text-transform:uppercase;
     }
 
-    .date-stamp::before{
+    .date-line::before{
       content:"";
-      width:42px;
+      width:43px;
       height:1px;
-      background:var(--story-rose);
+      background:var(--rose);
     }
 
-    .intro-photo{
+    /* CHAPITRE 1 */
+
+    .first-chapter{
+      display:grid;
+      grid-template-columns:.85fr 1.15fr;
+      gap:clamp(28px,6vw,90px);
+      align-items:center;
+    }
+
+    .first-photo{
       min-height:610px;
       position:relative;
-      border-radius:3px;
+      overflow:hidden;
       background:
-        linear-gradient(180deg,rgba(7,3,4,.04),rgba(7,3,4,.56)),
-        url("../../images/demo-01.webp") center/cover;
-      box-shadow:0 26px 80px rgba(0,0,0,.34);
+        linear-gradient(180deg,rgba(7,3,4,.02),rgba(7,3,4,.59)),
+        url("../../images/demo-first.webp") center/cover;
+      box-shadow:0 30px 80px rgba(0,0,0,.34);
     }
 
-    .intro-photo::after{
+    .first-photo::before{
       content:"";
       position:absolute;
-      left:-32px;
-      bottom:-32px;
-      width:52%;
+      left:-34px;
+      bottom:-34px;
+      width:54%;
       aspect-ratio:1;
-      border:1px solid rgba(245,137,163,.48);
+      border:1px solid rgba(247,145,169,.51);
       border-radius:50%;
-      pointer-events:none;
     }
 
-    .photo-caption{
+    .photo-note{
       position:absolute;
-      right:25px;
-      bottom:24px;
-      max-width:250px;
+      right:26px;
+      bottom:23px;
+      max-width:260px;
       color:#fff;
-      font:400 35px/1 "Allura","Brush Script MT",cursive;
+      font:400 39px/1 "Allura","Brush Script MT",cursive;
       text-align:right;
-      text-shadow:0 5px 21px rgba(0,0,0,.45);
+      text-shadow:0 5px 22px rgba(0,0,0,.42);
     }
 
-    .quote-stage{
-      padding:134px 0;
+    /* TIMELINE */
+
+    .timeline-section{
       position:relative;
       overflow:hidden;
+      padding:125px 0;
+      background:
+        linear-gradient(180deg,rgba(52,15,29,.84),rgba(9,5,7,.93)),
+        url("../../images/demo-timeline-bg.webp") center/cover;
+      background-blend-mode:overlay;
+    }
+
+    .timeline-section::before{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:0;
+      bottom:0;
+      width:1px;
+      background:linear-gradient(transparent,rgba(255,179,196,.36),transparent);
+    }
+
+    .timeline-head{
+      position:relative;
+      text-align:center;
+    }
+
+    .timeline-head .chapter-index{justify-content:center}
+    .timeline-head .chapter-title{
+      max-width:780px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .timeline-head .chapter-copy{
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .timeline{
+      position:relative;
+      max-width:970px;
+      margin:65px auto 0;
+      display:grid;
+      gap:46px;
+    }
+
+    .timeline-item{
+      display:grid;
+      grid-template-columns:1fr 74px 1fr;
+      gap:23px;
+      align-items:center;
+    }
+
+    .timeline-item:nth-child(even) .timeline-copy{
+      grid-column:3;
+      text-align:left;
+    }
+
+    .timeline-item:nth-child(even) .timeline-photo{
+      grid-column:1;
+      grid-row:1;
+    }
+
+    .timeline-marker{
+      grid-column:2;
+      grid-row:1;
+      width:58px;
+      height:58px;
+      margin:auto;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(255,180,197,.66);
+      border-radius:50%;
+      background:rgba(22,8,13,.70);
+      color:var(--rose-soft);
+      font:500 18px/1 "Cormorant Garamond",Georgia,serif;
+      position:relative;
+      z-index:1;
+    }
+
+    .timeline-photo{
+      min-height:210px;
+      background:
+        linear-gradient(180deg,rgba(7,3,4,.03),rgba(7,3,4,.35)),
+        var(--photo) center/cover;
+      box-shadow:0 18px 45px rgba(0,0,0,.28);
+    }
+
+    .timeline-copy h3{
+      margin:0;
+      font:500 33px/1 "Cormorant Garamond",Georgia,serif;
+    }
+
+    .timeline-copy p{
+      margin:9px 0 0;
+      color:#ead7dc;
+      font-size:12px;
+      line-height:1.68;
+    }
+
+    .timeline-copy small{
+      display:block;
+      margin-top:10px;
+      color:var(--rose-soft);
+      font-size:10px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+
+    /* CITATION */
+
+    .quote-section{
+      position:relative;
+      overflow:hidden;
+      padding:145px 0;
       text-align:center;
       background:
-        radial-gradient(circle at 50% 44%,rgba(180,46,77,.20),transparent 40%),
-        linear-gradient(180deg,rgba(39,12,22,.88),rgba(9,5,7,.92));
+        radial-gradient(circle at 50% 44%,rgba(190,43,80,.25),transparent 42%),
+        linear-gradient(180deg,rgba(49,14,26,.90),rgba(8,5,7,.96));
       border-top:1px solid rgba(255,199,211,.09);
       border-bottom:1px solid rgba(255,199,211,.09);
     }
 
-    .quote-stage::before,
-    .quote-stage::after{
+    .quote-section::before,
+    .quote-section::after{
       content:"♡";
       position:absolute;
-      color:rgba(247,128,157,.15);
-      font:400 clamp(180px,24vw,360px)/1 "Cormorant Garamond",serif;
+      color:rgba(248,129,159,.14);
+      font:400 clamp(200px,26vw,380px)/1 "Cormorant Garamond",Georgia,serif;
       pointer-events:none;
     }
 
-    .quote-stage::before{left:-6%;top:9%}
-    .quote-stage::after{right:-7%;bottom:-1%;transform:rotate(17deg)}
+    .quote-section::before{top:8%;left:-6%}
+    .quote-section::after{
+      right:-7%;
+      bottom:-4%;
+      transform:rotate(18deg);
+    }
 
-    .quote-stage p{
-      width:min(860px,calc(100% - 44px));
-      margin:0 auto;
+    .quote{
       position:relative;
       z-index:1;
-      font:500 clamp(38px,6vw,78px)/.98 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:-.035em;
+      width:min(900px,calc(100% - 44px));
+      margin:auto;
+      font:500 clamp(40px,6.5vw,84px)/.97 "Cormorant Garamond",Georgia,serif;
+      letter-spacing:-.04em;
     }
 
-    .quote-stage p span{
+    .quote span{
       display:block;
-      margin-top:21px;
-      color:var(--story-rose-soft);
-      font:400 clamp(49px,6vw,76px)/.72 "Allura","Brush Script MT",cursive;
-      letter-spacing:0;
+      margin-top:23px;
+      color:var(--rose-soft);
+      font:400 clamp(52px,6vw,82px)/.70 "Allura","Brush Script MT",cursive;
     }
 
-    .memory-grid{
+    /* GALERIE */
+
+    .gallery-intro{
       display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:17px;
-      align-items:stretch;
+      grid-template-columns:.8fr 1.2fr;
+      gap:clamp(28px,6vw,80px);
+      align-items:end;
+      margin-bottom:40px;
     }
 
-    .memory-big{
-      min-height:680px;
+    .gallery-intro .chapter-copy{margin-bottom:4px}
+
+    .gallery{
+      display:grid;
+      grid-template-columns:1.12fr .88fr .88fr;
+      grid-auto-rows:235px;
+      gap:14px;
+    }
+
+    .gallery-item{
       position:relative;
       overflow:hidden;
-      border-radius:3px;
-      background:
-        linear-gradient(180deg,rgba(7,3,4,.02),rgba(7,3,4,.74)),
-        url("../../images/demo-02.webp") center/cover;
+      border:0;
+      padding:0;
+      background:var(--image) center/cover;
+      cursor:pointer;
+      isolation:isolate;
+      transition:transform .25s ease;
     }
 
-    .memory-big .memory-copy{
+    .gallery-item::before{
+      content:"";
       position:absolute;
-      left:31px;
-      right:31px;
-      bottom:28px;
+      inset:0;
+      z-index:1;
+      background:linear-gradient(180deg,rgba(7,3,4,.01),rgba(7,3,4,.63));
+      opacity:.86;
+      transition:.25s ease;
     }
 
-    .memory-copy small{
-      color:#ffc6d2;
+    .gallery-item::after{
+      content:"↗";
+      position:absolute;
+      right:16px;
+      top:14px;
+      z-index:2;
+      width:33px;
+      height:33px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(255,226,233,.70);
+      border-radius:50%;
+      color:#fff;
+      opacity:0;
+      transform:translateY(7px);
+      transition:.25s ease;
+    }
+
+    .gallery-item:hover{transform:translateY(-3px)}
+    .gallery-item:hover::before{opacity:.58}
+    .gallery-item:hover::after{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .gallery-item--tall{grid-row:span 2}
+    .gallery-item--wide{grid-column:span 2}
+
+    .gallery-label{
+      position:absolute;
+      z-index:2;
+      left:18px;
+      right:18px;
+      bottom:15px;
+      text-align:left;
+      color:#fff;
+    }
+
+    .gallery-label strong{
+      display:block;
+      font:500 30px/1 "Cormorant Garamond",Georgia,serif;
+    }
+
+    .gallery-label span{
+      display:block;
+      margin-top:5px;
+      color:#f7dce2;
       font-size:10px;
-      letter-spacing:.19em;
+      letter-spacing:.10em;
       text-transform:uppercase;
     }
 
-    .memory-copy h2{
-      margin:8px 0 0;
-      max-width:480px;
-      font:500 clamp(37px,4.4vw,62px)/.96 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:-.035em;
-    }
+    /* LES CHIFFRES */
 
-    .memory-copy p{
-      max-width:430px;
-      margin:13px 0 0;
-      color:#f0dce1;
-      font-size:13px;
-      line-height:1.65;
-    }
-
-    .memory-side{
-      display:grid;
-      grid-template-rows:1fr 1fr;
-      gap:17px;
-    }
-
-    .memory-small{
-      min-height:330px;
+    .numbers-section{
       position:relative;
       overflow:hidden;
-      border-radius:3px;
+      padding:120px 0;
       background:
-        linear-gradient(180deg,rgba(7,3,4,.02),rgba(7,3,4,.76)),
-        var(--bg) center/cover;
+        linear-gradient(90deg,rgba(7,4,5,.90),rgba(7,4,5,.35),rgba(7,4,5,.90)),
+        url("../../images/demo-numbers.webp") center/cover;
     }
 
-    .memory-small .small-caption{
-      position:absolute;
-      left:24px;
-      bottom:20px;
-      right:24px;
+    .numbers-head{text-align:center}
+    .numbers-head .chapter-index{justify-content:center}
+
+    .numbers-head .chapter-title{
+      max-width:760px;
+      margin-left:auto;
+      margin-right:auto;
     }
 
-    .small-caption h3{
-      margin:0;
-      font:500 34px/1 "Cormorant Garamond",Georgia,serif;
+    .numbers-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:1px;
+      margin-top:57px;
+      background:rgba(255,199,211,.19);
+      border:1px solid rgba(255,199,211,.20);
     }
 
-    .small-caption p{
-      margin:7px 0 0;
-      color:#f0dfe2;
-      font-size:11px;
+    .number{
+      padding:31px 22px;
+      background:rgba(12,6,8,.72);
+      text-align:center;
+      backdrop-filter:blur(6px);
+    }
+
+    .number strong{
+      display:block;
+      color:#fff;
+      font:500 clamp(43px,5vw,70px)/.9 "Cormorant Garamond",Georgia,serif;
+    }
+
+    .number span{
+      display:block;
+      margin-top:8px;
+      color:#f8dce3;
+      font-size:10px;
       line-height:1.45;
+      letter-spacing:.10em;
+      text-transform:uppercase;
     }
 
-    .letter-stage{
+    /* LETTRE */
+
+    .letter-section{padding:118px 0}
+
+    .letter{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:0;
       overflow:hidden;
-      border:1px solid rgba(255,194,207,.13);
-      background:#f7ebe7;
-      color:#2a151d;
+      background:var(--paper);
+      color:var(--paper-ink);
     }
 
     .letter-photo{
-      min-height:640px;
+      min-height:660px;
       background:
-        linear-gradient(180deg,rgba(7,3,4,.02),rgba(7,3,4,.32)),
+        linear-gradient(180deg,rgba(7,3,4,.02),rgba(7,3,4,.30)),
         url("../../images/demo-letter.webp") center/cover;
     }
 
     .letter-copy{
-      padding:clamp(34px,6vw,78px);
       align-self:center;
+      padding:clamp(38px,6vw,82px);
       background:
-        radial-gradient(circle at 80% 10%,rgba(239,142,163,.25),transparent 38%),
-        #f9efeb;
+        radial-gradient(circle at 80% 11%,rgba(239,142,163,.24),transparent 38%),
+        var(--paper);
     }
 
     .letter-copy small{
-      color:#a8415d;
+      color:#aa405e;
       font-size:10px;
-      letter-spacing:.18em;
       font-weight:700;
+      letter-spacing:.18em;
       text-transform:uppercase;
     }
 
-    .letter-copy h2{
-      margin:17px 0 0;
-      font:500 clamp(46px,6vw,77px)/.83 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:-.04em;
+    .letter-title{
+      margin:18px 0 0;
+      font:500 clamp(49px,6vw,78px)/.82 "Cormorant Garamond",Georgia,serif;
+      letter-spacing:-.045em;
     }
 
-    .letter-copy h2 span{
-      display:block;
-      margin-top:9px;
-      color:#c24e6c;
-      font:400 .76em/.74 "Allura","Brush Script MT",cursive;
-      letter-spacing:0;
+    .letter-title span{
+      margin-top:10px;
+      color:#c04d6b;
     }
 
     .letter-copy p{
-      max-width:460px;
-      margin:23px 0 0;
-      color:#5d4048;
+      max-width:480px;
+      margin:24px 0 0;
+      color:#5f414a;
       font-size:14px;
-      line-height:1.78;
+      line-height:1.80;
     }
 
-    .letter-signature{
-      margin-top:27px;
-      color:#b24563;
-      font:400 50px/.7 "Allura","Brush Script MT",cursive;
+    .signature{
+      margin-top:28px!important;
+      color:#b34563!important;
+      font:400 55px/.7 "Allura","Brush Script MT",cursive!important;
     }
+
+    /* SECTION VIDEO */
+
+    .film-section{
+      min-height:80svh;
+      position:relative;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      isolation:isolate;
+      text-align:center;
+    }
+
+    .film-section::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-2;
+      background:
+        linear-gradient(180deg,rgba(7,3,4,.32),rgba(7,3,4,.79)),
+        url("../../images/demo-film.webp") center/cover;
+      transform:scale(1.04);
+    }
+
+    .film-section::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background:radial-gradient(circle at 50% 45%,rgba(240,125,155,.20),transparent 37%);
+    }
+
+    .film-content{
+      width:min(720px,calc(100% - 44px));
+    }
+
+    .film-content p:first-child{
+      color:#ffcbd5;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+    }
+
+    .film-title{
+      margin:16px 0 0;
+      font:500 clamp(50px,7vw,91px)/.84 "Cormorant Garamond",Georgia,serif;
+      letter-spacing:-.045em;
+    }
+
+    .film-title span{margin-top:12px}
+
+    .play-memory{
+      width:82px;
+      height:82px;
+      display:grid;
+      place-items:center;
+      margin:30px auto 0;
+      border:1px solid rgba(255,222,230,.80);
+      border-radius:50%;
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      font-size:24px;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .play-memory:hover{
+      transform:scale(1.06);
+      background:rgba(239,127,157,.30);
+    }
+
+    .film-note{
+      margin:16px auto 0!important;
+      color:#f3dce1!important;
+      font-size:12px!important;
+      font-weight:400!important;
+      letter-spacing:0!important;
+      text-transform:none!important;
+    }
+
+    /* FINAL */
 
     .finale{
-      min-height:94svh;
+      min-height:100svh;
       position:relative;
       display:grid;
       place-items:center;
       overflow:hidden;
       text-align:center;
       isolation:isolate;
-      background:#070506;
+      background:var(--black);
     }
 
     .finale::before{
@@ -740,9 +983,15 @@
       inset:0;
       z-index:-2;
       background:
-        linear-gradient(180deg,rgba(7,3,4,.62),rgba(7,3,4,.76)),
+        linear-gradient(180deg,rgba(7,3,4,.63),rgba(7,3,4,.77)),
         url("../../images/demo-final.webp") center/cover;
       transform:scale(1.04);
+      animation:finalMove 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes finalMove{
+      from{transform:scale(1.04)}
+      to{transform:scale(1.12) translateY(-1%)}
     }
 
     .finale::after{
@@ -750,78 +999,121 @@
       position:absolute;
       inset:0;
       z-index:-1;
-      background:radial-gradient(circle at 50% 47%,rgba(232,97,133,.21),transparent 36%);
+      background:radial-gradient(circle at 50% 46%,rgba(232,97,133,.24),transparent 37%);
     }
 
-    .finale-content{
-      width:min(840px,calc(100% - 44px));
+    .final-inner{
+      width:min(870px,calc(100% - 44px));
     }
 
-    .finale-kicker{
-      margin:0;
-      color:#ffc6d1;
-      font-size:10px;
-      font-weight:700;
-      letter-spacing:.23em;
-      text-transform:uppercase;
-    }
-
-    .finale h2{
+    .final-title{
       margin:20px 0 0;
-      font:500 clamp(54px,9vw,120px)/.77 "Cormorant Garamond",Georgia,serif;
-      letter-spacing:-.055em;
+      font:500 clamp(58px,9vw,125px)/.76 "Cormorant Garamond",Georgia,serif;
+      letter-spacing:-.057em;
     }
 
-    .finale h2 span{
-      display:block;
-      margin-top:13px;
-      color:#ffc5d1;
-      font:400 .66em/.72 "Allura","Brush Script MT",cursive;
-      letter-spacing:0;
-    }
+    .final-title span{margin-top:14px}
 
-    .finale p{
-      max-width:510px;
-      margin:25px auto 0;
+    .final-copy{
+      max-width:535px;
+      margin:27px auto 0;
       color:#f7e4e9;
       font-size:14px;
-      line-height:1.65;
+      line-height:1.66;
     }
 
-    .finale-actions{
+    .final-actions{
       display:flex;
       justify-content:center;
       flex-wrap:wrap;
       gap:12px;
-      margin-top:30px;
+      margin-top:31px;
     }
 
+    .button-outline{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:52px;
+      padding:0 23px;
+      border:1px solid rgba(255,207,217,.56);
+      border-radius:999px;
+      color:#fff;
+      font-size:12px;
+      transition:.2s ease;
+    }
+
+    .button-outline:hover{background:rgba(239,127,157,.14)}
+
+    /* FOOTER */
+
     .story-footer{
-      padding:40px 0;
-      text-align:center;
+      padding:40px 20px;
       background:#070506;
+      text-align:center;
     }
 
     .story-footer p{
       margin:0;
-      color:#bca9af;
+      color:#bfaab1;
       font-size:10px;
-      letter-spacing:.12em;
+      letter-spacing:.13em;
       text-transform:uppercase;
     }
 
     .story-footer a{
       display:inline-flex;
-      margin-top:16px;
-      color:var(--story-rose-soft);
+      margin-top:17px;
+      color:var(--rose-soft);
       font-size:12px;
       font-weight:700;
     }
 
+    /* LIGHTBOX */
+
+    .lightbox{
+      position:fixed;
+      inset:0;
+      z-index:950;
+      display:none;
+      place-items:center;
+      padding:24px;
+      border:0;
+      background:rgba(5,3,4,.95);
+      backdrop-filter:blur(16px);
+    }
+
+    .lightbox.is-open{display:grid}
+
+    .lightbox img{
+      max-width:min(100%,1140px);
+      max-height:82svh;
+      object-fit:contain;
+      box-shadow:0 30px 80px rgba(0,0,0,.62);
+    }
+
+    .lightbox-close{
+      position:absolute;
+      top:20px;
+      right:24px;
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(255,205,216,.52);
+      border-radius:50%;
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      font-size:24px;
+      cursor:pointer;
+    }
+
+    /* ANIMATION */
+
     .reveal{
       opacity:0;
       transform:translateY(34px);
-      transition:opacity .85s cubic-bezier(.2,.75,.2,1),transform .85s cubic-bezier(.2,.75,.2,1);
+      transition:opacity .86s cubic-bezier(.2,.75,.2,1),transform .86s cubic-bezier(.2,.75,.2,1);
     }
 
     .reveal.is-visible{
@@ -829,220 +1121,437 @@
       transform:translateY(0);
     }
 
-    @media(max-width:860px){
-      .story-nav{width:min(100% - 28px,1240px)}
-      .story-demo-badge{display:none}
-      .hero-heart-ring{width:62vw;right:-3%;top:16%}
-      .split-intro{grid-template-columns:1fr}
-      .intro-photo{min-height:480px;max-width:620px;margin:0 auto;width:100%}
-      .memory-grid{grid-template-columns:1fr}
-      .memory-big{min-height:540px}
-      .memory-side{grid-template-columns:1fr 1fr;grid-template-rows:none}
-      .letter-stage{grid-template-columns:1fr}
-      .letter-photo{min-height:390px}
+    .reveal-delay{transition-delay:.16s}
+
+    /* MOBILE */
+
+    @media(max-width:900px){
+      .header-label{display:none}
+      .hero-heart{width:61vw;right:-3%;top:17%}
+      .first-chapter,
+      .gallery-intro{grid-template-columns:1fr}
+      .first-photo{
+        min-height:500px;
+        max-width:650px;
+        width:100%;
+        margin:0 auto;
+      }
+      .timeline-item{
+        grid-template-columns:1fr 54px 1fr;
+        gap:15px;
+      }
+      .letter{grid-template-columns:1fr}
+      .letter-photo{min-height:420px}
     }
 
-    @media(max-width:560px){
-      .story-nav{min-height:64px}
-      .story-nav-brand .brand-name{font-size:13px;letter-spacing:.18em}
-      .story-nav-brand .brand-label{font-size:6px}
-      .story-return{padding:8px 11px;font-size:10px}
-      .music-toggle{width:35px;height:35px}
-      .story-hero{min-height:100svh;padding:110px 0 46px}
-      .hero-content,.story-shell{width:min(100% - 28px,1160px)}
-      .hero-title{font-size:78px}
-      .hero-copy{max-width:310px;font-size:13px}
-      .hero-heart-ring{top:26%;width:83vw;right:-12%}
-      .scroll-prompt{display:none}
-      .story-section{padding:78px 0}
-      .chapter-title{font-size:48px}
-      .intro-photo{min-height:420px}
-      .intro-photo::after{left:-15px;bottom:-15px}
-      .quote-stage{padding:88px 0}
-      .quote-stage p{font-size:43px}
-      .memory-big{min-height:470px}
-      .memory-side{grid-template-columns:1fr;grid-template-rows:auto}
-      .memory-small{min-height:290px}
-      .letter-copy{padding:34px 26px}
-      .letter-copy h2{font-size:54px}
-      .finale h2{font-size:67px}
-      .gate-content h1{font-size:75px}
-      .gate-content p{font-size:13px}
+    @media(max-width:580px){
+      .story-nav{
+        width:min(100% - 26px,var(--max));
+        min-height:65px;
+      }
+
+      .brand-name{
+        font-size:13px;
+        letter-spacing:.17em;
+      }
+
+      .brand-sub{font-size:6px}
+      .back-link{padding:8px 11px;font-size:9px}
+      .sound-button{width:35px;height:35px}
+
+      .hero{padding:105px 0 48px}
+
+      .hero-content,
+      .shell{
+        width:min(100% - 28px,var(--max));
+      }
+
+      .hero-title{font-size:80px}
+      .hero-copy{max-width:315px;font-size:13px}
+      .hero-heart{
+        top:27%;
+        right:-13%;
+        width:84vw;
+      }
+
+      .story-section{padding:80px 0}
+      .chapter-title{font-size:49px}
+
+      .first-photo{min-height:420px}
+
+      .first-photo::before{
+        left:-15px;
+        bottom:-15px;
+      }
+
+      .timeline-section{padding:80px 0}
+      .timeline-section::before{left:25px}
+
+      .timeline{
+        gap:30px;
+        margin-top:42px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(even){
+        grid-template-columns:45px 1fr;
+        gap:13px;
+      }
+
+      .timeline-marker,
+      .timeline-item:nth-child(even) .timeline-marker{
+        grid-column:1;
+        grid-row:1;
+        align-self:start;
+        width:45px;
+        height:45px;
+        font-size:15px;
+      }
+
+      .timeline-photo,
+      .timeline-item:nth-child(even) .timeline-photo{
+        display:none;
+      }
+
+      .timeline-copy,
+      .timeline-item:nth-child(even) .timeline-copy{
+        grid-column:2;
+        grid-row:1;
+        text-align:left;
+      }
+
+      .timeline-copy h3{font-size:28px}
+
+      .quote-section{padding:91px 0}
+      .quote{font-size:45px}
+
+      .gallery{
+        grid-template-columns:1fr 1fr;
+        grid-auto-rows:180px;
+        gap:9px;
+      }
+
+      .gallery-item--tall{grid-row:span 2}
+      .gallery-item--wide{grid-column:span 2}
+
+      .gallery-label strong{font-size:24px}
+
+      .numbers-section{padding:80px 0}
+
+      .numbers-grid{
+        grid-template-columns:1fr 1fr;
+        margin-top:38px;
+      }
+
+      .number{padding:24px 12px}
+
+      .letter-copy{padding:36px 26px}
+      .letter-title{font-size:55px}
+
+      .film-section{min-height:72svh}
+      .final-title{font-size:70px}
+      .entry-title{font-size:78px}
+      .entry-copy{font-size:13px}
     }
-  </style>
-</head>
-
-<body class="demo-page">
-  <div class="progress-line" aria-hidden="true"><span data-progress></span></div>
-
-  <div class="entry-gate" data-entry-gate>
-    <div class="gate-content">
-      <p class="gate-kicker">Une histoire vous attend</p>
-      <h1>Pour Camille<span>avec tout mon amour.</span></h1>
-      <p>Ce que tu vas découvrir ne tient pas dans une boîte. Prends juste quelques minutes. Le reste, c’est nous.</p>
-      <button class="gate-button" type="button" data-enter-story>Ouvrir l’histoire <span aria-hidden="true">♡</span></button>
-      <p class="gate-note">Démo MakeYourStory</p>
+  </style></head><body>
+  <div class="scroll-progress" aria-hidden="true"><span data-progress></span></div>  <section class="entry" data-entry>
+    <div class="entry-inner">
+      <p class="entry-kicker">Pour Camille · De la part de Thomas</p>
+      <h1 class="entry-title">Je t’ai préparé<span>quelque chose.</span></h1>
+      <p class="entry-copy">Pas un cadeau qu’on pose sur une étagère. Quelques pages qui racontent ce qu’on a vécu, ce que je garde, et tout ce que je veux encore vivre avec toi.</p>
+      <button class="button-main" type="button" data-enter>Tu es prête ? <span aria-hidden="true">♡</span></button>
+      <p class="entry-note">Prends ton temps. Cette histoire est pour toi.</p>
     </div>
-  </div>
-
-  <header class="site-header" data-story-header>
-    <div class="story-nav">
-      <a class="story-nav-brand" href="../../index.html" aria-label="Retour à MakeYourStory">
+  </section>  <header class="story-header" data-header>
+    <nav class="story-nav">
+      <a class="brand" href="../../index.html" aria-label="Retour à MakeYourStory">
         <span class="brand-mark" aria-hidden="true">M</span>
         <span>
           <span class="brand-name">MAKE YOUR STORY</span>
-          <span class="brand-label">DÉMONSTRATION</span>
+          <span class="brand-sub">HISTOIRE DÉMONSTRATION</span>
         </span>
-      </a>
+      </a>  <div class="header-actions">
+    <span class="header-label">Camille & Thomas</span>
+    <button class="sound-button" type="button" aria-label="Activer ou couper la musique" aria-pressed="false" data-sound>♪</button>
+    <a class="back-link" href="../../index.html">Retour au site</a>
+  </div>
+</nav>
 
-      <div class="story-nav-actions">
-        <span class="story-demo-badge">Camille & Thomas</span>
-        <button class="music-toggle" type="button" data-music-toggle aria-label="Activer ou couper la musique" aria-pressed="false">♪</button>
-        <a class="story-return" href="../../index.html">Retour au site</a>
-      </div>
-    </div>
-  </header>
-
-  <audio id="demoMusic" preload="none" loop>
+  </header>  <audio id="story-audio" preload="none" loop>
     <source src="../../audio/demo-love.mp3" type="audio/mpeg">
-  </audio>
+  </audio>  <main>
+    <section class="hero">
+      <div class="hero-heart" aria-hidden="true"></div>  <div class="hero-content">
+    <p class="hero-kicker">Notre histoire · depuis le 14 juin 2021</p>
+    <h1 class="hero-title">Camille<span>& Thomas</span></h1>
+    <p class="hero-copy">Il y a des rencontres qui changent une journée. Et puis il y a celles qui changent tout ce qui vient après.</p>
 
-  <main>
-    <section class="story-hero">
-      <div class="hero-heart-ring" aria-hidden="true"></div>
-      <div class="hero-content">
-        <p class="hero-overline">Notre histoire · 14 juin 2021</p>
-        <h1 class="hero-title">Camille<span>& Thomas</span></h1>
-        <p class="hero-copy">Il y a des rencontres qui changent un jour. Et puis il y a celles qui changent tout ce qui vient après.</p>
-        <div class="hero-meta"><span>Une histoire à deux</span><span>À ouvrir sans se presser</span></div>
-        <div class="scroll-prompt">Faire défiler</div>
-      </div>
-    </section>
+    <div class="hero-meta">
+      <span>Une histoire à deux</span>
+      <span>À découvrir sans se presser</span>
+    </div>
+  </div>
+</section>
 
-    <section class="story-section">
-      <div class="story-shell split-intro">
-        <div class="reveal">
-          <p class="chapter-count">Chapitre un</p>
-          <h2 class="chapter-title">Tout a commencé<span>sans qu’on le sache.</span></h2>
-          <p class="chapter-text">Une conversation un peu trop longue. Un premier rire. Une façon de se regarder qui disait déjà beaucoup plus que tout le reste.</p>
-          <p class="date-stamp">14 juin 2021 · 22 h 47</p>
+<section class="story-section">
+  <div class="shell first-chapter">
+    <div class="reveal">
+      <p class="chapter-index" data-number="01">Le début</p>
+      <h2 class="chapter-title">Tout a commencé<span>sans qu’on le sache.</span></h2>
+      <p class="chapter-copy">Une conversation un peu trop longue. Un premier rire. Une façon de se regarder qui disait déjà beaucoup plus que tout le reste.</p>
+      <p class="date-line">14 juin 2021 · 22 h 47</p>
+    </div>
+
+    <div class="first-photo reveal reveal-delay">
+      <p class="photo-note">Le début de tout.</p>
+    </div>
+  </div>
+</section>
+
+<section class="timeline-section">
+  <div class="shell">
+    <div class="timeline-head reveal">
+      <p class="chapter-index" data-number="02">Les premières fois</p>
+      <h2 class="chapter-title">On n’a rien prévu.<span>C’est pour ça que c’était si beau.</span></h2>
+      <p class="chapter-copy">Quelques dates que personne d’autre ne remarquerait. Pour nous, elles ont tout changé.</p>
+    </div>
+
+    <div class="timeline">
+      <article class="timeline-item reveal">
+        <div class="timeline-copy">
+          <h3>Le premier vrai rendez-vous.</h3>
+          <p>Ce café qui devait durer une heure. On est restés jusqu’à ce que le serveur commence à ranger les chaises.</p>
+          <small>21 juin 2021</small>
         </div>
-        <div class="intro-photo reveal">
-          <p class="photo-caption">Le début de tout.</p>
+
+        <div class="timeline-marker">01</div>
+
+        <div class="timeline-photo" style="--photo:url('../../images/demo-timeline-01.webp')"></div>
+      </article>
+
+      <article class="timeline-item reveal">
+        <div class="timeline-copy">
+          <h3>Le premier “tu me manques”.</h3>
+          <p>Pas spectaculaire. Juste vrai. Et c’est là que j’ai compris que j’avais envie de tout raconter avec toi.</p>
+          <small>03 juillet 2021</small>
         </div>
-      </div>
-    </section>
 
-    <section class="quote-stage">
-      <p class="reveal">« Ce n’est pas le nombre de jours.<span>C’est tout ce qu’ils ont rempli. »</span></p>
-    </section>
+        <div class="timeline-marker">02</div>
 
-    <section class="story-section">
-      <div class="story-shell memory-grid">
-        <article class="memory-big reveal">
-          <div class="memory-copy">
-            <small>Les moments simples</small>
-            <h2>Ceux qu’on ne pense pas à photographier. Ceux qu’on n’oublie jamais.</h2>
-            <p>Les retours trop tard, les cafés sans raison, les trajets où l’on chante faux, les soirées où tout va bien juste parce qu’on est ensemble.</p>
-          </div>
-        </article>
+        <div class="timeline-photo" style="--photo:url('../../images/demo-timeline-02.webp')"></div>
+      </article>
 
-        <div class="memory-side">
-          <article class="memory-small reveal" style="--bg:url('../../images/demo-03.webp')">
-            <div class="small-caption">
-              <h3>Nos endroits.</h3>
-              <p>Quelques rues, quelques habitudes, et partout un peu de nous.</p>
-            </div>
-          </article>
-
-          <article class="memory-small reveal" style="--bg:url('../../images/demo-04.webp')">
-            <div class="small-caption">
-              <h3>Nos fous rires.</h3>
-              <p>Parce qu’ils méritaient mieux qu’une vidéo perdue dans un téléphone.</p>
-            </div>
-          </article>
+      <article class="timeline-item reveal">
+        <div class="timeline-copy">
+          <h3>Le premier voyage sans plan.</h3>
+          <p>Quelques kilomètres, une playlist trop forte, et cette impression de déjà être à la bonne place.</p>
+          <small>19 août 2021</small>
         </div>
-      </div>
-    </section>
 
-    <section class="story-section">
-      <div class="story-shell letter-stage reveal">
-        <div class="letter-photo" role="img" aria-label="Souvenir de Camille et Thomas"></div>
-        <article class="letter-copy">
-          <small>Une lettre à garder</small>
-          <h2>Pour toi,<span>encore et toujours.</span></h2>
-          <p>Je ne savais pas comment t’offrir tout ce que tu représentes. Alors j’ai rassemblé quelques morceaux de nous : les photos, les détails, les moments qu’on aurait pu laisser filer.</p>
-          <p>Parce que tu mérites de savoir que je me souviens. Et que, parmi toutes les choses que je choisirais encore, il y a toi.</p>
-          <p class="letter-signature">Thomas ♡</p>
-        </article>
-      </div>
-    </section>
+        <div class="timeline-marker">03</div>
 
-    <section class="finale">
-      <div class="finale-content reveal">
-        <p class="finale-kicker">La suite n’est pas écrite</p>
-        <h2>Mais je sais<span>avec qui je veux la vivre.</span></h2>
-        <p>Cette démo montre ce qu’un cadeau peut devenir quand il raconte vraiment quelque chose. Vos photos, vos mots, votre musique, votre histoire.</p>
-        <div class="finale-actions">
-          <a class="gate-button" href="../../commander.html">Créer une histoire comme celle-ci <span aria-hidden="true">♡</span></a>
-          <a class="story-return" href="../../index.html">Découvrir MakeYourStory</a>
-        </div>
-      </div>
-    </section>
-  </main>
+        <div class="timeline-photo" style="--photo:url('../../images/demo-timeline-03.webp')"></div>
+      </article>
+    </div>
+  </div>
+</section>
 
-  <footer class="story-footer">
-    <p>Démo créée pour MakeYourStory · Une marque BASALTE-WEB</p>
+<section class="quote-section">
+  <p class="quote reveal">« Ce n’est pas le nombre de jours.<span>C’est tout ce qu’ils ont rempli. »</span></p>
+</section>
+
+<section class="story-section">
+  <div class="shell">
+    <div class="gallery-intro">
+      <div class="reveal">
+        <p class="chapter-index" data-number="03">Nos souvenirs</p>
+        <h2 class="chapter-title">Les preuves qu’on a<span>vraiment vécu tout ça.</span></h2>
+      </div>
+
+      <p class="chapter-copy reveal reveal-delay">Les photos parfaites sont belles. Mais ce sont souvent les autres qui nous ressemblent le plus : les floues, les imprévues, celles prises sans y penser.</p>
+    </div>
+
+    <div class="gallery">
+      <button class="gallery-item gallery-item--tall reveal" type="button" style="--image:url('../../images/demo-gallery-01.webp')" data-lightbox="../../images/demo-gallery-01.webp">
+        <span class="gallery-label">
+          <strong>Nos premiers week-ends.</strong>
+          <span>Sans plan, mais jamais sans envie.</span>
+        </span>
+      </button>
+
+      <button class="gallery-item reveal" type="button" style="--image:url('../../images/demo-gallery-02.webp')" data-lightbox="../../images/demo-gallery-02.webp">
+        <span class="gallery-label">
+          <strong>Après la pluie.</strong>
+          <span>Et toujours ce rire.</span>
+        </span>
+      </button>
+
+      <button class="gallery-item reveal reveal-delay" type="button" style="--image:url('../../images/demo-gallery-03.webp')" data-lightbox="../../images/demo-gallery-03.webp">
+        <span class="gallery-label">
+          <strong>Le monde autour.</strong>
+          <span>Un peu moins important.</span>
+        </span>
+      </button>
+
+      <button class="gallery-item gallery-item--wide reveal" type="button" style="--image:url('../../images/demo-gallery-04.webp')" data-lightbox="../../images/demo-gallery-04.webp">
+        <span class="gallery-label">
+          <strong>Nous deux, juste là.</strong>
+          <span>Et c’était largement suffisant.</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="numbers-section">
+  <div class="shell">
+    <div class="numbers-head reveal">
+      <p class="chapter-index" data-number="04">Notre petite folie</p>
+      <h2 class="chapter-title">Ce que les chiffres<span>ne disent pas vraiment.</span></h2>
+    </div>
+
+    <div class="numbers-grid">
+      <article class="number reveal">
+        <strong>1 097</strong>
+        <span>jours à s’aimer<br>un peu plus fort</span>
+      </article>
+
+      <article class="number reveal reveal-delay">
+        <strong>27</strong>
+        <span>week-ends à partir<br>sans programme</span>
+      </article>
+
+      <article class="number reveal">
+        <strong>∞</strong>
+        <span>fous rires à ne<br>jamais compter</span>
+      </article>
+
+      <article class="number reveal reveal-delay">
+        <strong>1</strong>
+        <span>personne avec qui<br>je recommencerais tout</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="letter-section">
+  <div class="shell">
+    <article class="letter reveal">
+      <div class="letter-photo" role="img" aria-label="Souvenir tendre de Camille et Thomas"></div>
+
+      <div class="letter-copy">
+        <small>La partie que je ne savais pas dire</small>
+
+        <h2 class="letter-title">Pour toi,<span>encore et toujours.</span></h2>
+
+        <p>Je ne savais pas comment t’offrir tout ce que tu représentes. Alors j’ai rassemblé quelques morceaux de nous : les photos, les détails, les moments qu’on aurait pu laisser filer.</p>
+
+        <p>Parce que tu mérites de savoir que je me souviens. Et que, parmi toutes les choses que je choisirais encore, il y a toi.</p>
+
+        <p>Je veux que tu gardes cette page comme on garde une main, une odeur, une chanson : sans avoir besoin de l’expliquer.</p>
+
+        <p class="signature">Thomas ♡</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="film-section">
+  <div class="film-content reveal">
+    <p>Un souvenir en mouvement</p>
+
+    <h2 class="film-title">Et si notre histoire<span>avait une bande-annonce ?</span></h2>
+
+    <button class="play-memory" type="button" aria-label="Ouvrir le souvenir vidéo" data-video>▷</button>
+
+    <p class="film-note">Clique ici : cet emplacement pourra contenir une vidéo personnelle du couple.</p>
+  </div>
+</section>
+
+<section class="finale">
+  <div class="final-inner reveal">
+    <p class="final-kicker">La suite ne tient pas encore dans une photo</p>
+
+    <h2 class="final-title">Mais je sais<span>avec qui je veux la vivre.</span></h2>
+
+    <p class="final-copy">C’est ça que MakeYourStory peut offrir : pas une galerie. Un moment à ouvrir. Une histoire qui fait dire « tu as vraiment pensé à moi ».</p>
+
+    <div class="final-actions">
+      <a class="button-main" href="../../commander.html">Créer une histoire comme celle-ci <span aria-hidden="true">♡</span></a>
+      <a class="button-outline" href="../../index.html">Découvrir MakeYourStory</a>
+    </div>
+  </div>
+</section>
+
+  </main>  <footer class="story-footer">
+    <p>Démo MakeYourStory · Une marque BASALTE-WEB</p>
     <a href="../../contact.html">Parler de votre propre histoire</a>
-  </footer>
+  </footer>  <dialog class="lightbox" data-lightbox-dialog>
+    <button class="lightbox-close" type="button" aria-label="Fermer">×</button>
+    <img src="" alt="Souvenir agrandi" data-lightbox-image>
+  </dialog>  <dialog class="lightbox" data-video-dialog>
+    <button class="lightbox-close" type="button" aria-label="Fermer">×</button><div style="max-width:680px;text-align:center;color:#fff">
+  <p style="margin:0;color:#ffcbd5;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Emplacement vidéo</p>
 
-  <script src="../../assets/site.js" defer></script>
-  <script>
+  <h2 style="margin:16px 0 0;font:500 clamp(42px,7vw,76px)/.86 'Cormorant Garamond',Georgia,serif">
+    Ici, tu peux intégrer
+    <span style="display:block;color:#ffcbd5;font:400 .73em/.72 'Allura','Brush Script MT',cursive">votre plus beau souvenir en vidéo.</span>
+  </h2>
+
+  <p style="max-width:520px;margin:20px auto 0;color:#ead7dc;font-size:13px;line-height:1.65">
+    Pour une vraie commande, cet emplacement pourra contenir une vidéo MP4, une vidéo YouTube non répertoriée ou un montage souvenir.
+  </p>
+</div>
+
+  </dialog>  <script>
     (() => {
-      const gate = document.querySelector("[data-entry-gate]");
-      const enter = document.querySelector("[data-enter-story]");
-      const header = document.querySelector("[data-story-header]");
-      const music = document.getElementById("demoMusic");
-      const musicToggle = document.querySelector("[data-music-toggle]");
+      const entry = document.querySelector("[data-entry]");
+      const enterButton = document.querySelector("[data-enter]");
+      const header = document.querySelector("[data-header]");
       const progress = document.querySelector("[data-progress]");
-
-      const openStory = () => {
-        gate.classList.add("is-open");
-        document.body.style.overflow = "";
-        window.setTimeout(() => gate.remove(), 950);
-      };
+      const audio = document.getElementById("story-audio");
+      const soundButton = document.querySelector("[data-sound]");
+      const lightbox = document.querySelector("[data-lightbox-dialog]");
+      const lightboxImage = document.querySelector("[data-lightbox-image]");
+      const videoDialog = document.querySelector("[data-video-dialog]");
+      const videoButton = document.querySelector("[data-video]");
 
       document.body.style.overflow = "hidden";
-      enter.addEventListener("click", openStory);
+
+      enterButton.addEventListener("click", () => {
+        entry.classList.add("is-open");
+        document.body.style.overflow = "";
+        setTimeout(() => entry.remove(), 900);
+      });
 
       window.addEventListener("scroll", () => {
-        header.classList.toggle("is-scrolled", window.scrollY > 28);
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        const ratio = max > 0 ? (window.scrollY / max) * 100 : 0;
-        progress.style.width = ratio + "%";
+        header.classList.toggle("is-solid", window.scrollY > 25);
+
+        const maximum = document.documentElement.scrollHeight - window.innerHeight;
+        progress.style.width = (maximum ? (window.scrollY / maximum) * 100 : 0) + "%";
       }, { passive:true });
 
-      musicToggle.addEventListener("click", async () => {
+      soundButton.addEventListener("click", async () => {
         try {
-          if (music.paused) {
-            await music.play();
-            musicToggle.classList.add("is-playing");
-            musicToggle.setAttribute("aria-pressed", "true");
-            musicToggle.textContent = "❚❚";
+          if (audio.paused) {
+            await audio.play();
+            soundButton.classList.add("is-on");
+            soundButton.setAttribute("aria-pressed", "true");
+            soundButton.textContent = "❚❚";
           } else {
-            music.pause();
-            musicToggle.classList.remove("is-playing");
-            musicToggle.setAttribute("aria-pressed", "false");
-            musicToggle.textContent = "♪";
+            audio.pause();
+            soundButton.classList.remove("is-on");
+            soundButton.setAttribute("aria-pressed", "false");
+            soundButton.textContent = "♪";
           }
         } catch (error) {
-          musicToggle.textContent = "!";
-          musicToggle.title = "Ajoutez audio/demo-love.mp3 pour activer la musique.";
+          soundButton.textContent = "!";
+          soundButton.title = "Ajoute le fichier audio/demo-love.mp3 pour activer la musique.";
         }
       });
 
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
             observer.unobserve(entry.target);
@@ -1050,8 +1559,37 @@
         });
       }, { threshold:0.16 });
 
-      document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+      document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+
+      document.querySelectorAll("[data-lightbox]").forEach((button) => {
+        button.addEventListener("click", () => {
+          lightboxImage.src = button.dataset.lightbox;
+          lightbox.showModal();
+          lightbox.classList.add("is-open");
+        });
+      });
+
+      videoButton.addEventListener("click", () => {
+        videoDialog.showModal();
+        videoDialog.classList.add("is-open");
+      });
+
+      document.querySelectorAll(".lightbox-close").forEach((button) => {
+        button.addEventListener("click", () => {
+          const dialog = button.closest("dialog");
+          dialog.close();
+          dialog.classList.remove("is-open");
+        });
+      });
+
+      [lightbox, videoDialog].forEach((dialog) => {
+        dialog.addEventListener("click", (event) => {
+          if (event.target === dialog) {
+            dialog.close();
+            dialog.classList.remove("is-open");
+          }
+        });
+      });
     })();
-  </script>
-</body>
+  </script></body>
 </html>
